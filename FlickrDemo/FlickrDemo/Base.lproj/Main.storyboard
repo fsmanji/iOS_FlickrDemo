@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yel-0j-CAq">
+                                <rect key="frame" x="24" y="28" width="552" height="44"/>
+                                <items>
+                                    <barButtonItem title="Share" id="Ghl-Ne-JRc"/>
+                                </items>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="c1r-VG-Ki9"/>
+                                </connections>
+                            </toolbar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R41-Yk-xEx">
+                                <rect key="frame" x="26" y="122" width="548" height="54"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NXl-jF-8c7">
+                                        <rect key="frame" x="5" y="5" width="54" height="44"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="5gb-cp-xLL">
+                                        <rect key="frame" x="90" y="5" width="453" height="44"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="3qc-Ae-0s8"/>
+                                        </connections>
+                                    </searchBar>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="5gb-cp-xLL" firstAttribute="centerY" secondItem="NXl-jF-8c7" secondAttribute="centerY" constant="0.75" id="0Fc-c7-VOo"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5gb-cp-xLL" secondAttribute="trailing" constant="5" id="0QX-PM-PEh"/>
+                                    <constraint firstAttribute="bottom" secondItem="5gb-cp-xLL" secondAttribute="bottom" constant="5" id="1DA-P9-bmd"/>
+                                    <constraint firstAttribute="trailing" secondItem="5gb-cp-xLL" secondAttribute="trailing" constant="5" id="237-lI-Rdp"/>
+                                    <constraint firstAttribute="bottom" secondItem="NXl-jF-8c7" secondAttribute="bottom" constant="5" id="O1p-U4-DRb"/>
+                                    <constraint firstItem="NXl-jF-8c7" firstAttribute="leading" secondItem="R41-Yk-xEx" secondAttribute="leading" constant="5" id="axD-pr-xUn"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="5gb-cp-xLL" secondAttribute="bottom" constant="5" id="beB-wf-XZZ"/>
+                                    <constraint firstItem="NXl-jF-8c7" firstAttribute="top" secondItem="R41-Yk-xEx" secondAttribute="top" constant="5" id="fJZ-RO-dsy"/>
+                                    <constraint firstItem="5gb-cp-xLL" firstAttribute="leading" secondItem="NXl-jF-8c7" secondAttribute="trailing" constant="31" id="hTi-O4-HH9"/>
+                                    <constraint firstItem="5gb-cp-xLL" firstAttribute="top" secondItem="R41-Yk-xEx" secondAttribute="top" constant="5" id="ogd-B2-88z"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="0Fc-c7-VOo"/>
+                                        <exclude reference="0QX-PM-PEh"/>
+                                        <exclude reference="beB-wf-XZZ"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="divider_bar.png" translatesAutoresizingMaskIntoConstraints="NO" id="6To-kM-sML">
+                                <rect key="frame" x="21" y="184" width="697" height="13"/>
+                            </imageView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9j3-hQ-GvV">
+                                <rect key="frame" x="21" y="202" width="558" height="393"/>
+                                <color key="backgroundColor" red="0.67127706819999999" green="1" blue="0.72607486720000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="d1X-wM-ghK">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="rVz-QN-3MN" customClass="FlickrPhotoCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="Rft-fo-cpZ"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="EAK-TS-czl"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="R41-Yk-xEx" secondAttribute="trailing" constant="10" id="4mm-Mw-kH1"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="yel-0j-CAq" secondAttribute="trailing" constant="8" id="8xi-Av-Ff3"/>
+                            <constraint firstItem="6To-kM-sML" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="5" id="CaX-ef-nbq"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="9j3-hQ-GvV" secondAttribute="bottom" constant="5" id="DAT-jL-8Xv"/>
+                            <constraint firstItem="6To-kM-sML" firstAttribute="top" secondItem="R41-Yk-xEx" secondAttribute="bottom" constant="8" id="KtX-PS-i7G"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9j3-hQ-GvV" secondAttribute="trailing" constant="5" id="MZI-SQ-GWd"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="6To-kM-sML" secondAttribute="trailing" constant="5" id="QDK-PQ-aTK"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6To-kM-sML" secondAttribute="trailing" constant="5" id="TyF-JV-wAM"/>
+                            <constraint firstItem="9j3-hQ-GvV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="5" id="YIM-Do-oHh"/>
+                            <constraint firstItem="9j3-hQ-GvV" firstAttribute="top" secondItem="6To-kM-sML" secondAttribute="bottom" constant="5" id="ahN-vN-2fi"/>
+                            <constraint firstItem="yel-0j-CAq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="8" id="cyu-eZ-I5L"/>
+                            <constraint firstItem="R41-Yk-xEx" firstAttribute="top" secondItem="yel-0j-CAq" secondAttribute="bottom" constant="50" id="ln4-NC-gap"/>
+                            <constraint firstItem="R41-Yk-xEx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="vNZ-n3-cGv"/>
+                            <constraint firstItem="yel-0j-CAq" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="wDB-eT-WUH"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="QDK-PQ-aTK"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="9j3-hQ-GvV" id="aMN-ft-smH"/>
+                        <outlet property="rootView" destination="8bC-Xf-vdC" id="fuC-ag-zPV"/>
+                        <outlet property="searchBar" destination="5gb-cp-xLL" id="Mw5-eV-EMT"/>
+                        <outlet property="shareButton" destination="Ghl-Ne-JRc" id="j9B-ir-5Wx"/>
+                        <outlet property="toolBar" destination="yel-0j-CAq" id="7Um-eq-8nq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="divider_bar.png" width="697" height="13"/>
+    </resources>
+</document>
