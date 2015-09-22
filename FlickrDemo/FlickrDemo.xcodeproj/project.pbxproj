@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6239517B89B8F3CD8E3ED29D /* libPods-FlickrDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 041C4941F72AA3ED46204514 /* libPods-FlickrDemo.a */; };
+		B362CFB71BB1E23400AD9BAE /* JustifiedLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B362CFB61BB1E23400AD9BAE /* JustifiedLayout.m */; };
 		B3A2DE391BB0BF7A006BE0DB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A2DE381BB0BF7A006BE0DB /* main.m */; };
 		B3A2DE3C1BB0BF7A006BE0DB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A2DE3B1BB0BF7A006BE0DB /* AppDelegate.m */; };
 		B3A2DE3F1BB0BF7A006BE0DB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A2DE3E1BB0BF7A006BE0DB /* ViewController.m */; };
@@ -53,6 +54,8 @@
 
 /* Begin PBXFileReference section */
 		041C4941F72AA3ED46204514 /* libPods-FlickrDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FlickrDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B362CFB51BB1E23400AD9BAE /* JustifiedLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JustifiedLayout.h; sourceTree = "<group>"; };
+		B362CFB61BB1E23400AD9BAE /* JustifiedLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JustifiedLayout.m; sourceTree = "<group>"; };
 		B3A2DE331BB0BF7A006BE0DB /* FlickrDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3A2DE371BB0BF7A006BE0DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3A2DE381BB0BF7A006BE0DB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -240,6 +243,8 @@
 				B3A2DE951BB1C9EC006BE0DB /* FlickrCollectionViewCell.h */,
 				B3A2DE961BB1C9EC006BE0DB /* FlickrCollectionViewCell.m */,
 				B3A2DE971BB1C9EC006BE0DB /* FlickrCollectionViewCell.xib */,
+				B362CFB51BB1E23400AD9BAE /* JustifiedLayout.h */,
+				B362CFB61BB1E23400AD9BAE /* JustifiedLayout.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -414,6 +419,7 @@
 				B3A2DE3C1BB0BF7A006BE0DB /* AppDelegate.m in Sources */,
 				B3A2DE8A1BB0C391006BE0DB /* Flickr.m in Sources */,
 				B3A2DE8B1BB0C391006BE0DB /* FlickrPhoto.m in Sources */,
+				B362CFB71BB1E23400AD9BAE /* JustifiedLayout.m in Sources */,
 				B3A2DE391BB0BF7A006BE0DB /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

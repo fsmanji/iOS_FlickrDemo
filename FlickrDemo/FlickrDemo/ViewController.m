@@ -10,8 +10,9 @@
 #import "Flickr.h"
 #import "FlickrPhoto.h"
 #import "FlickrCollectionViewCell.h"
+#import "JustifiedLayout.h"
 
-#define MAX_HEIGHT 80
+#define MAX_HEIGHT 120
 
 @interface ViewController () <UISearchBarDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (strong, nonatomic) IBOutlet UIView *rootView;
@@ -20,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UIToolbar *toolBar;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *searchButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *exploreButton;
 
 
 @property(nonatomic, strong) NSMutableDictionary *searchResults;
@@ -47,6 +50,11 @@
     [_collectionView registerNib:nib forCellWithReuseIdentifier:@"FlickrCollectionViewCell"];
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
+    _collectionView.collectionViewLayout = [[JustifiedLayout alloc] init];
+    
+    //wire up explore button
+    [_exploreButton setTarget:self];
+    [_exploreButton setAction:@selector(showExplorePhotos:)];
 }
 
 - (void)styleViews {
@@ -60,9 +68,32 @@
     UIImage *shareButtonImage = [[UIImage imageNamed:@"button.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
     [self.shareButton setBackgroundImage:shareButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     
+    [self.searchButton setBackgroundImage:shareButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [self.exploreButton setBackgroundImage:shareButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    
     UIImage *textFieldImage = [[UIImage imageNamed:@"search_field.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     [self.searchBar setBackgroundImage:textFieldImage];
     _collectionView.backgroundColor = [UIColor clearColor];
+}
+
+-(IBAction)showExplorePhotos:(id)sender {
+    [_flickr exploreWithCompletionBlock:^(NSArray *results, NSError *error) {
+        if(results && [results count] > 0) {
+            NSString * searchTerm = @"explore";
+            if(![self.searches containsObject:searchTerm]) {
+                NSLog(@"Found %ld photos matching %@", [results count],searchTerm);
+                [self.searches insertObject:searchTerm atIndex:0];
+                self.searchResults[searchTerm] = results;
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_collectionView reloadData];
+            });
+        } else {
+            NSLog(@"Error searching Flickr: %@", error.localizedDescription);
+        }
+    }];
+
 }
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
@@ -72,7 +103,6 @@
     
     NSString * query = searchBar.text;
     if (query && query.length > 0) {
-
         [_flickr searchFlickrForTerm:query completionBlock:^(NSString *searchTerm, NSArray *results, NSError *error) {
             if(results && [results count] > 0) {
             // 2
@@ -88,24 +118,6 @@
         } else { // 1
             NSLog(@"Error searching Flickr: %@", error.localizedDescription);
         }
-        }];
-    } else {
-        
-        [_flickr exploreWithCompletionBlock:^(NSArray *results, NSError *error) {
-            if(results && [results count] > 0) {
-                NSString * searchTerm = @"explore";
-                if(![self.searches containsObject:searchTerm]) {
-                    NSLog(@"Found %ld photos matching %@", [results count],searchTerm);
-                    [self.searches insertObject:searchTerm atIndex:0];
-                    self.searchResults[searchTerm] = results;
-                }
-
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [_collectionView reloadData];
-                });
-            } else {
-                NSLog(@"Error searching Flickr: %@", error.localizedDescription);
-            }
         }];
     }
 }
@@ -157,12 +169,22 @@
     
     return [self adjustify:retval];
 }
+//Begin: ensure there is 2.0 spacing between cells
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return 2.0;
+}
 
-// 3
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return 2.0;
+}
+
+// Layout: Set Edges
 - (UIEdgeInsets)collectionView:
 (UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(50, 20, 50, 20);
+    return UIEdgeInsetsMake(0,0,0,0);  // top, left, bottom, right
 }
+
+//End: ensure there is 2.0 spacing between cells
 
 -(CGSize) adjustify:(CGSize)size {
     int width = size.width;

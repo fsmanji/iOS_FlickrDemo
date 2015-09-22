@@ -21,7 +21,15 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yel-0j-CAq">
                                 <rect key="frame" x="24" y="28" width="552" height="44"/>
                                 <items>
-                                    <barButtonItem title="Share" id="Ghl-Ne-JRc"/>
+                                    <barButtonItem title="Share" id="Ghl-Ne-JRc">
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </barButtonItem>
+                                    <barButtonItem title="Search Flickr" id="zJK-jF-cLJ">
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </barButtonItem>
+                                    <barButtonItem title="Explore" id="OWV-Dv-QvV">
+                                        <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </barButtonItem>
                                 </items>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="c1r-VG-Ki9"/>
@@ -120,8 +128,10 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="9j3-hQ-GvV" id="aMN-ft-smH"/>
+                        <outlet property="exploreButton" destination="OWV-Dv-QvV" id="R7f-JL-qgW"/>
                         <outlet property="rootView" destination="8bC-Xf-vdC" id="fuC-ag-zPV"/>
                         <outlet property="searchBar" destination="5gb-cp-xLL" id="Mw5-eV-EMT"/>
+                        <outlet property="searchButton" destination="zJK-jF-cLJ" id="ObS-rL-Q58"/>
                         <outlet property="shareButton" destination="Ghl-Ne-JRc" id="j9B-ir-5Wx"/>
                         <outlet property="toolBar" destination="yel-0j-CAq" id="7Um-eq-8nq"/>
                     </connections>
