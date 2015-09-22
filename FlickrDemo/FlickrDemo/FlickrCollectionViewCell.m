@@ -19,11 +19,6 @@
     NSString * url = [photo flickrPhotoURLForSize:@"m"];
     //[_imageView setImageWithURL:[NSURL URLWithString:url]];
     _imageView.image = photo.thumbnail;
-    if(!_imageView) {
-        NSLog(@"setPhotoInfo: imageview not created yet!");
-    } else {
-        NSLog(@"loading cell: %@", photo.title);
-    }
 }
 
 - (id)initWithFrame:(CGRect)aRect
@@ -46,11 +41,6 @@
     NSString * url = [_photo flickrPhotoURLForSize:@"m"];
     //[_imageView setImageWithURL:[NSURL URLWithString:url]];
     _imageView.image = _photo.thumbnail;
-    if(!_imageView) {
-        NSLog(@"commonInit: imageview not created yet!");
-    } else {
-        NSLog(@"loading cell: %@", _photo.title);
-    }
 }
 
 @end

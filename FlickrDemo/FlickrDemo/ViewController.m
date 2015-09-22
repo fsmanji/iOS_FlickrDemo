@@ -11,6 +11,7 @@
 #import "FlickrPhoto.h"
 #import "FlickrCollectionViewCell.h"
 #import "JustifiedLayout.h"
+#import "StackLayout.h"
 
 #define MAX_HEIGHT 120
 
@@ -50,7 +51,8 @@
     [_collectionView registerNib:nib forCellWithReuseIdentifier:@"FlickrCollectionViewCell"];
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
-    _collectionView.collectionViewLayout = [[JustifiedLayout alloc] init];
+   // _collectionView.collectionViewLayout = [[JustifiedLayout alloc] init];
+    _collectionView.collectionViewLayout = [[StackLayout alloc] init];
     
     //wire up explore button
     [_exploreButton setTarget:self];

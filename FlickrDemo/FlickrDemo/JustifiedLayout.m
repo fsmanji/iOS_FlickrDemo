@@ -10,6 +10,10 @@
 
 #define kMaxSpacing 5
 
+#define kMaxHeight 120
+
+#define kMaxCellPerRow 4
+
 @implementation JustifiedLayout
 
 - (NSArray *) layoutAttributesForElementsInRect:(CGRect)rect {

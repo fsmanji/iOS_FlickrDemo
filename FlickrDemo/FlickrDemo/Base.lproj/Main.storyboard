@@ -21,14 +21,15 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yel-0j-CAq">
                                 <rect key="frame" x="24" y="28" width="552" height="44"/>
                                 <items>
-                                    <barButtonItem title="Share" id="Ghl-Ne-JRc">
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    </barButtonItem>
-                                    <barButtonItem title="Search Flickr" id="zJK-jF-cLJ">
+                                    <barButtonItem title="Search" id="zJK-jF-cLJ">
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     </barButtonItem>
                                     <barButtonItem title="Explore" id="OWV-Dv-QvV">
                                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </barButtonItem>
+                                    <barButtonItem width="100" style="plain" systemItem="fixedSpace" id="DJi-kR-Bbj"/>
+                                    <barButtonItem title="Stack Layout" id="lAw-h8-ueO">
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     </barButtonItem>
                                 </items>
                                 <connections>
@@ -77,7 +78,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="divider_bar.png" translatesAutoresizingMaskIntoConstraints="NO" id="6To-kM-sML">
                                 <rect key="frame" x="21" y="184" width="697" height="13"/>
                             </imageView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9j3-hQ-GvV">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9j3-hQ-GvV">
                                 <rect key="frame" x="21" y="202" width="558" height="393"/>
                                 <color key="backgroundColor" red="0.67127706819999999" green="1" blue="0.72607486720000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="d1X-wM-ghK">
@@ -126,13 +127,14 @@
                             </mask>
                         </variation>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="9j3-hQ-GvV" id="aMN-ft-smH"/>
                         <outlet property="exploreButton" destination="OWV-Dv-QvV" id="R7f-JL-qgW"/>
                         <outlet property="rootView" destination="8bC-Xf-vdC" id="fuC-ag-zPV"/>
                         <outlet property="searchBar" destination="5gb-cp-xLL" id="Mw5-eV-EMT"/>
                         <outlet property="searchButton" destination="zJK-jF-cLJ" id="ObS-rL-Q58"/>
-                        <outlet property="shareButton" destination="Ghl-Ne-JRc" id="j9B-ir-5Wx"/>
                         <outlet property="toolBar" destination="yel-0j-CAq" id="7Um-eq-8nq"/>
                     </connections>
                 </viewController>
