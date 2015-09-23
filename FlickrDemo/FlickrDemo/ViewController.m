@@ -13,7 +13,7 @@
 #import "JustifiedLayout.h"
 #import "StackLayout.h"
 #import "JustifiedViewController.h"
-
+#import "UIAlertView+FSMANJI.h"
 
 @interface ViewController () <UISearchBarDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (strong, nonatomic) IBOutlet UIView *rootView;
@@ -70,7 +70,7 @@
 }
 
 - (void)styleViews {
-    [super didReceiveMemoryWarning];
+
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_cork.png"]];
     
     UIImage *navBarImage = [[UIImage imageNamed:@"navbar.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(27, 27, 27, 27)];
@@ -105,6 +105,7 @@
             });
         } else {
             NSLog(@"Error searching Flickr: %@", error.localizedDescription);
+            [UIAlertView showAlert:self with:@"Flickr APIKey Expired" withMessage:@"Please replace the 'kExploreUrl' with the latest url on flickr dev site."];
         }
     }];
 
@@ -131,6 +132,7 @@
             });
         } else { // 1
             NSLog(@"Error searching Flickr: %@", error.localizedDescription);
+            [UIAlertView showAlert:self with:@"Flickr APIKey Expired" withMessage:@"Please replace the 'kApiKey/kAuthToken/kApiSig' with the latest ones."];
         }
         }];
     }

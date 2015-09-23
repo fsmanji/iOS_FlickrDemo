@@ -14,6 +14,7 @@
 		B362CFBF1BB25C7100AD9BAE /* JustifiedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B362CFBD1BB25C7100AD9BAE /* JustifiedViewController.xib */; };
 		B362CFC21BB3197E00AD9BAE /* JustifiedRow.m in Sources */ = {isa = PBXBuildFile; fileRef = B362CFC11BB3197E00AD9BAE /* JustifiedRow.m */; };
 		B362CFC51BB3199D00AD9BAE /* JustifiedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B362CFC41BB3199D00AD9BAE /* JustifiedItem.m */; };
+		B362CFCC1BB35D1A00AD9BAE /* UIAlertView+FSMANJI.m in Sources */ = {isa = PBXBuildFile; fileRef = B362CFCB1BB35D1A00AD9BAE /* UIAlertView+FSMANJI.m */; };
 		B3A2DE391BB0BF7A006BE0DB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A2DE381BB0BF7A006BE0DB /* main.m */; };
 		B3A2DE3C1BB0BF7A006BE0DB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A2DE3B1BB0BF7A006BE0DB /* AppDelegate.m */; };
 		B3A2DE3F1BB0BF7A006BE0DB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A2DE3E1BB0BF7A006BE0DB /* ViewController.m */; };
@@ -70,6 +71,8 @@
 		B362CFC11BB3197E00AD9BAE /* JustifiedRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JustifiedRow.m; sourceTree = "<group>"; };
 		B362CFC31BB3199D00AD9BAE /* JustifiedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JustifiedItem.h; sourceTree = "<group>"; };
 		B362CFC41BB3199D00AD9BAE /* JustifiedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JustifiedItem.m; sourceTree = "<group>"; };
+		B362CFCA1BB35D1A00AD9BAE /* UIAlertView+FSMANJI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+FSMANJI.h"; sourceTree = "<group>"; };
+		B362CFCB1BB35D1A00AD9BAE /* UIAlertView+FSMANJI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+FSMANJI.m"; sourceTree = "<group>"; };
 		B3A2DE331BB0BF7A006BE0DB /* FlickrDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3A2DE371BB0BF7A006BE0DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3A2DE381BB0BF7A006BE0DB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -150,6 +153,28 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		B362CFCD1BB361C100AD9BAE /* Justified Layout */ = {
+			isa = PBXGroup;
+			children = (
+				B362CFC01BB3197E00AD9BAE /* JustifiedRow.h */,
+				B362CFC11BB3197E00AD9BAE /* JustifiedRow.m */,
+				B362CFC31BB3199D00AD9BAE /* JustifiedItem.h */,
+				B362CFC41BB3199D00AD9BAE /* JustifiedItem.m */,
+			);
+			name = "Justified Layout";
+			sourceTree = "<group>";
+		};
+		B362CFCE1BB361FB00AD9BAE /* Custom FlowLayout */ = {
+			isa = PBXGroup;
+			children = (
+				B362CFB51BB1E23400AD9BAE /* JustifiedLayout.h */,
+				B362CFB61BB1E23400AD9BAE /* JustifiedLayout.m */,
+				B362CFB81BB1F62A00AD9BAE /* StackLayout.h */,
+				B362CFB91BB1F62A00AD9BAE /* StackLayout.m */,
+			);
+			name = "Custom FlowLayout";
+			sourceTree = "<group>";
+		};
 		B3A2DE2A1BB0BF7A006BE0DB = {
 			isa = PBXGroup;
 			children = (
@@ -173,7 +198,9 @@
 		B3A2DE351BB0BF7A006BE0DB /* FlickrDemo */ = {
 			isa = PBXGroup;
 			children = (
-				B3A2DE9A1BB1D254006BE0DB /* ViewControllers */,
+				B362CFCE1BB361FB00AD9BAE /* Custom FlowLayout */,
+				B362CFCD1BB361C100AD9BAE /* Justified Layout */,
+				B3A2DE9A1BB1D254006BE0DB /* View Controllers */,
 				B3A2DE8C1BB115C5006BE0DB /* Views */,
 				B3A2DE851BB0C37B006BE0DB /* API */,
 				B3A2DE5C1BB0BFB6006BE0DB /* Assets */,
@@ -257,19 +284,13 @@
 				B3A2DE951BB1C9EC006BE0DB /* FlickrCollectionViewCell.h */,
 				B3A2DE961BB1C9EC006BE0DB /* FlickrCollectionViewCell.m */,
 				B3A2DE971BB1C9EC006BE0DB /* FlickrCollectionViewCell.xib */,
-				B362CFB51BB1E23400AD9BAE /* JustifiedLayout.h */,
-				B362CFB61BB1E23400AD9BAE /* JustifiedLayout.m */,
-				B362CFB81BB1F62A00AD9BAE /* StackLayout.h */,
-				B362CFB91BB1F62A00AD9BAE /* StackLayout.m */,
-				B362CFC01BB3197E00AD9BAE /* JustifiedRow.h */,
-				B362CFC11BB3197E00AD9BAE /* JustifiedRow.m */,
-				B362CFC31BB3199D00AD9BAE /* JustifiedItem.h */,
-				B362CFC41BB3199D00AD9BAE /* JustifiedItem.m */,
+				B362CFCA1BB35D1A00AD9BAE /* UIAlertView+FSMANJI.h */,
+				B362CFCB1BB35D1A00AD9BAE /* UIAlertView+FSMANJI.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
 		};
-		B3A2DE9A1BB1D254006BE0DB /* ViewControllers */ = {
+		B3A2DE9A1BB1D254006BE0DB /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				B3A2DE3D1BB0BF7A006BE0DB /* ViewController.h */,
@@ -278,7 +299,7 @@
 				B362CFBC1BB25C7100AD9BAE /* JustifiedViewController.m */,
 				B362CFBD1BB25C7100AD9BAE /* JustifiedViewController.xib */,
 			);
-			name = ViewControllers;
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -442,6 +463,7 @@
 				B3A2DE981BB1C9EC006BE0DB /* FlickrCollectionViewCell.m in Sources */,
 				B3A2DE3C1BB0BF7A006BE0DB /* AppDelegate.m in Sources */,
 				B362CFC51BB3199D00AD9BAE /* JustifiedItem.m in Sources */,
+				B362CFCC1BB35D1A00AD9BAE /* UIAlertView+FSMANJI.m in Sources */,
 				B3A2DE8A1BB0C391006BE0DB /* Flickr.m in Sources */,
 				B362CFBE1BB25C7100AD9BAE /* JustifiedViewController.m in Sources */,
 				B362CFBA1BB1F62A00AD9BAE /* StackLayout.m in Sources */,
