@@ -19,6 +19,6 @@
 
 +(id) initWithArray:(NSArray *)items endIndex:(NSUInteger)end;
 
--(void) justifyItemSizes:(CGFloat)maxWidth minimalSpace:(CGFloat)minimalSpace;
+-(void) justifyItemSizes:(CGFloat)maxWidth maxHeight:(CGFloat)maxHeight minSpace:(CGFloat)minSpace;
 
 @end

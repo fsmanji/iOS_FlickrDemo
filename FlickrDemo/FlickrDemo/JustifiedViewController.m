@@ -17,10 +17,16 @@
 
 #define MAX_HEIGHT 120
 #define kMaxSpacing 5
+#define kMaxItemsPerRow 5
 
 @interface JustifiedViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+
+//this contains justified layout rows, where each row itself has a NSArray of JustifiedItems, so you can treat each row as a section
 @property(nonatomic, strong) NSMutableArray *rows;
+
+//this contains array of JustifiedItems, so if your collection has its own sections, you use this to get all items regardless of section.
+@property(nonatomic, strong) NSMutableArray *items;
 
 @end
 
@@ -35,7 +41,7 @@
     _collectionView.dataSource = self;
     
     _rows = [NSMutableArray array];
-    
+    _items = [NSMutableArray array];
     
     //_collectionView.collectionViewLayout = [[JustifiedLayout alloc] init];
     //_collectionView.collectionViewLayout = [[StackLayout alloc] init];
@@ -59,6 +65,7 @@
 -(void)justifyCollectionView {
     
     [self.rows removeAllObjects];
+    [self.items removeAllObjects];
     
     NSArray * photos = _searchResults[_searches[0]];
     
@@ -70,28 +77,42 @@
     [photos enumerateObjectsUsingBlock:^(FlickrPhoto* photo, NSUInteger idx, BOOL *stop) {
         
         CGSize size = photo.thumbnail.size;
-        CGSize newSize = [self adjustify:size];
-        JustifiedItem* item = [JustifiedItem initWithData:photo justifiedSize:newSize];
+
+        JustifiedItem* item = [JustifiedItem initWithData:photo originalSize:size maxHeight:MAX_HEIGHT];
+        
         NSLog(@"processing item: %lu", (unsigned long)idx);
-        CGFloat currentSize = newSize.width + kMaxSpacing;
-        if(x +  currentSize < maxWidth){
+        CGFloat currentSize = item.size.width + kMaxSpacing;
+        if(x +  currentSize < maxWidth && row.count < kMaxItemsPerRow){
             [row addObject:item];
             x += currentSize;
         } else {
             //add row
             NSLog(@"create row end at: %lu, right = %f, count= %ld", (unsigned long)idx, x, [row count]);
             JustifiedRow* rowObject = [JustifiedRow initWithArray:row endIndex:idx-1];
-            [rowObject justifyItemSizes:maxWidth minimalSpace:kMaxSpacing];
             [self.rows addObject:rowObject];
-            
             
             //restart row
             [row removeAllObjects];
             [row addObject:item];
             x = currentSize;
         }
+        
+        if( idx == photos.count - 1) {
+            //add the last row
+            NSLog(@"create row end at: %lu, right = %f, count= %ld", (unsigned long)idx, x, [row count]);
+            JustifiedRow* rowObject = [JustifiedRow initWithArray:row endIndex:idx-1];
+            [self.rows addObject:rowObject];
+        }
     }];
     
+    //justify the rows
+    
+    [_rows enumerateObjectsUsingBlock:^(JustifiedRow* rowObject, NSUInteger idx, BOOL *stop) {
+        [rowObject justifyItemSizes:maxWidth maxHeight:MAX_HEIGHT minSpace:kMaxSpacing];
+        [rowObject.items enumerateObjectsUsingBlock:^(JustifiedItem *item, NSUInteger idx, BOOL *stop) {
+            [self.items addObject:item];
+        }];
+    }];
     
     
     [_collectionView reloadData];
@@ -107,20 +128,25 @@
 #pragma mark - UICollectionView Datasource
 // 1
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
-    //NSString *searchTerm = self.searches[section];
-    JustifiedRow * row = self.rows[section];
-    return [row.items count];
+    //JustifiedRow * row = self.rows[section];
+    //return row.items.count;
+    return [_items count];
 }
 // 2
 - (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView {
-    return [self.rows count];
+    //return _rows.count;
+    return 1;
 }
 // 3
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     FlickrCollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"FlickrCollectionViewCell" forIndexPath:indexPath];
-    JustifiedRow * row = self.rows[indexPath.section];
-    JustifiedItem *item = row.items[indexPath.row];
+    //JustifiedRow * row = self.rows[indexPath.section];
+    //JustifiedItem *item = row.items[indexPath.row];
+    
+    JustifiedItem *item = _items[indexPath.row];
+    
     [cell setPhotoInfo:item.photo];
+    
     cell.backgroundColor = [UIColor whiteColor];
     return cell;
     
@@ -146,19 +172,20 @@
 // 1
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    JustifiedRow * row = self.rows[indexPath.section];
-    JustifiedItem *item = row.items[indexPath.row];
+    //JustifiedRow * row = self.rows[indexPath.section];
+    //JustifiedItem *item = row.items[indexPath.row];
+    JustifiedItem *item = _items[indexPath.row];
     return item.size;
     
 }
 
 //Begin: ensure there is 2.0 spacing between cells
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    return 2.0;
+    return kMaxSpacing;
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 2.0;
+    return kMaxSpacing;
 }
 
 // Layout: Set Edges
@@ -168,14 +195,5 @@
 }
 
 //End: ensure there is 2.0 spacing between cells
-
--(CGSize) adjustify:(CGSize)size {
-    int width = size.width;
-    int height = size.height;
-    float ratio = (float)width / (float)height;
-    size.height = MAX_HEIGHT;
-    size.width = ratio * size.height;
-    return size;
-}
 
 @end
