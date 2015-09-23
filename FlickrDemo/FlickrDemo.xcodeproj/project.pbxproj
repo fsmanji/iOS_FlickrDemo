@@ -10,6 +10,10 @@
 		6239517B89B8F3CD8E3ED29D /* libPods-FlickrDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 041C4941F72AA3ED46204514 /* libPods-FlickrDemo.a */; };
 		B362CFB71BB1E23400AD9BAE /* JustifiedLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B362CFB61BB1E23400AD9BAE /* JustifiedLayout.m */; };
 		B362CFBA1BB1F62A00AD9BAE /* StackLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B362CFB91BB1F62A00AD9BAE /* StackLayout.m */; };
+		B362CFBE1BB25C7100AD9BAE /* JustifiedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B362CFBC1BB25C7100AD9BAE /* JustifiedViewController.m */; };
+		B362CFBF1BB25C7100AD9BAE /* JustifiedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B362CFBD1BB25C7100AD9BAE /* JustifiedViewController.xib */; };
+		B362CFC21BB3197E00AD9BAE /* JustifiedRow.m in Sources */ = {isa = PBXBuildFile; fileRef = B362CFC11BB3197E00AD9BAE /* JustifiedRow.m */; };
+		B362CFC51BB3199D00AD9BAE /* JustifiedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B362CFC41BB3199D00AD9BAE /* JustifiedItem.m */; };
 		B3A2DE391BB0BF7A006BE0DB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A2DE381BB0BF7A006BE0DB /* main.m */; };
 		B3A2DE3C1BB0BF7A006BE0DB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A2DE3B1BB0BF7A006BE0DB /* AppDelegate.m */; };
 		B3A2DE3F1BB0BF7A006BE0DB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A2DE3E1BB0BF7A006BE0DB /* ViewController.m */; };
@@ -59,6 +63,13 @@
 		B362CFB61BB1E23400AD9BAE /* JustifiedLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JustifiedLayout.m; sourceTree = "<group>"; };
 		B362CFB81BB1F62A00AD9BAE /* StackLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackLayout.h; sourceTree = "<group>"; };
 		B362CFB91BB1F62A00AD9BAE /* StackLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StackLayout.m; sourceTree = "<group>"; };
+		B362CFBB1BB25C7100AD9BAE /* JustifiedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JustifiedViewController.h; sourceTree = "<group>"; };
+		B362CFBC1BB25C7100AD9BAE /* JustifiedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JustifiedViewController.m; sourceTree = "<group>"; };
+		B362CFBD1BB25C7100AD9BAE /* JustifiedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JustifiedViewController.xib; sourceTree = "<group>"; };
+		B362CFC01BB3197E00AD9BAE /* JustifiedRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JustifiedRow.h; sourceTree = "<group>"; };
+		B362CFC11BB3197E00AD9BAE /* JustifiedRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JustifiedRow.m; sourceTree = "<group>"; };
+		B362CFC31BB3199D00AD9BAE /* JustifiedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JustifiedItem.h; sourceTree = "<group>"; };
+		B362CFC41BB3199D00AD9BAE /* JustifiedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JustifiedItem.m; sourceTree = "<group>"; };
 		B3A2DE331BB0BF7A006BE0DB /* FlickrDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3A2DE371BB0BF7A006BE0DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3A2DE381BB0BF7A006BE0DB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -250,6 +261,10 @@
 				B362CFB61BB1E23400AD9BAE /* JustifiedLayout.m */,
 				B362CFB81BB1F62A00AD9BAE /* StackLayout.h */,
 				B362CFB91BB1F62A00AD9BAE /* StackLayout.m */,
+				B362CFC01BB3197E00AD9BAE /* JustifiedRow.h */,
+				B362CFC11BB3197E00AD9BAE /* JustifiedRow.m */,
+				B362CFC31BB3199D00AD9BAE /* JustifiedItem.h */,
+				B362CFC41BB3199D00AD9BAE /* JustifiedItem.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -259,6 +274,9 @@
 			children = (
 				B3A2DE3D1BB0BF7A006BE0DB /* ViewController.h */,
 				B3A2DE3E1BB0BF7A006BE0DB /* ViewController.m */,
+				B362CFBB1BB25C7100AD9BAE /* JustifiedViewController.h */,
+				B362CFBC1BB25C7100AD9BAE /* JustifiedViewController.m */,
+				B362CFBD1BB25C7100AD9BAE /* JustifiedViewController.xib */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -354,6 +372,7 @@
 				B3A2DE821BB0BFB6006BE0DB /* search_field@2x.png in Resources */,
 				B3A2DE7B1BB0BFB6006BE0DB /* navbar.png in Resources */,
 				B3A2DE471BB0BF7A006BE0DB /* LaunchScreen.xib in Resources */,
+				B362CFBF1BB25C7100AD9BAE /* JustifiedViewController.xib in Resources */,
 				B3A2DE781BB0BFB6006BE0DB /* divider_bar@2x.png in Resources */,
 				B3A2DE751BB0BFB6006BE0DB /* decoration_snail.png in Resources */,
 				B3A2DE771BB0BFB6006BE0DB /* divider_bar.png in Resources */,
@@ -422,10 +441,13 @@
 				B3A2DE3F1BB0BF7A006BE0DB /* ViewController.m in Sources */,
 				B3A2DE981BB1C9EC006BE0DB /* FlickrCollectionViewCell.m in Sources */,
 				B3A2DE3C1BB0BF7A006BE0DB /* AppDelegate.m in Sources */,
+				B362CFC51BB3199D00AD9BAE /* JustifiedItem.m in Sources */,
 				B3A2DE8A1BB0C391006BE0DB /* Flickr.m in Sources */,
+				B362CFBE1BB25C7100AD9BAE /* JustifiedViewController.m in Sources */,
 				B362CFBA1BB1F62A00AD9BAE /* StackLayout.m in Sources */,
 				B3A2DE8B1BB0C391006BE0DB /* FlickrPhoto.m in Sources */,
 				B362CFB71BB1E23400AD9BAE /* JustifiedLayout.m in Sources */,
+				B362CFC21BB3197E00AD9BAE /* JustifiedRow.m in Sources */,
 				B3A2DE391BB0BF7A006BE0DB /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

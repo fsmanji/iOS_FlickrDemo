@@ -25,6 +25,9 @@
 
 - (NSArray *) layoutAttributesForElementsInRect:(CGRect)rect {
     NSArray *answer = [super layoutAttributesForElementsInRect:rect];
+    NSLog(@"----Rect----: x=%f, y=%f", rect.origin.x, rect.origin.y);
+    
+    BOOL shouldContinuePreviousRect = NO;
     
     for(int i = 0; i+3 < [answer count]; i+=3) {
         UICollectionViewLayoutAttributes *currentLayoutAttributes = answer[i];
@@ -33,18 +36,28 @@
         
         CGRect frame = currentLayoutAttributes.frame;
         if(i==0){
-            _startX = frame.origin.x;
-            _lastX = _startX;
-            _lastY = frame.origin.y;
-            NSLog(@"Line: x=%f, y=%f", frame.origin.x, frame.origin.y);
+            if(_lastY < 1) {
+                _startX = frame.origin.x;
+                _lastX = _startX;
+                _lastY = frame.origin.y;
+                NSLog(@"== NewLine ==: x=%f, y=%f", frame.origin.x, frame.origin.y);
+
+            } else {
+                //******* A new Rect has started *******
+                //**** we need to connect this rect with the previous one edge by edge ****
+               
+                shouldContinuePreviousRect = YES;
+                NSLog(@"== Continue ==: lastX=%f, lastY=%f", _lastX, _lastY);
+            }
         }
-        if(i > 0) {
+        
+        if(i > 0 || shouldContinuePreviousRect) {
             
             if (_lastX + (frame.size.width + kMaxSpacing)*2 > self.collectionViewContentSize.width) {
                 frame.origin.x = _startX;
-                //update top only if this is a new line
+                //-- new line needed ----
                 frame.origin.y = _lastY + kMaxSpacing + frame.size.height;
-                 NSLog(@"Line: x=%f, y=%f", frame.origin.x, frame.origin.y);
+                 NSLog(@"== NewLine ==: x=%f, y=%f", frame.origin.x, frame.origin.y);
             } else {
                 frame.origin.x = _lastX + kMaxSpacing;
                 frame.origin.y = _lastY;
@@ -71,8 +84,8 @@
         frame3.origin.x = left + kMaxSpacing;
         
         
-        frame2.size.height = height /2 -kMaxSpacing;
-        frame3.size.height = height /2 -kMaxSpacing;
+        frame2.size.height = height /2 -kMaxSpacing/2;
+        frame3.size.height = height /2 -kMaxSpacing/2;
         
         frame2.size.width = width;
         frame3.size.width = width;

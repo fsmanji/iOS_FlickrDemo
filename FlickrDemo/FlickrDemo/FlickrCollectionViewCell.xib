@@ -15,7 +15,7 @@
                     <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xvF-eJ-h6l">
                         <rect key="frame" x="0.0" y="36" width="310" height="299"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pushpin.png" translatesAutoresizingMaskIntoConstraints="NO" id="Nvp-rM-CAM">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="750" image="pushpin.png" translatesAutoresizingMaskIntoConstraints="NO" id="Nvp-rM-CAM">
                         <rect key="frame" x="0.0" y="0.0" width="310" height="31"/>
                     </imageView>
                 </subviews>

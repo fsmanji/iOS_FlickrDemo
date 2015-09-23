@@ -12,8 +12,8 @@
 #import "FlickrCollectionViewCell.h"
 #import "JustifiedLayout.h"
 #import "StackLayout.h"
+#import "JustifiedViewController.h"
 
-#define MAX_HEIGHT 120
 
 @interface ViewController () <UISearchBarDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (strong, nonatomic) IBOutlet UIView *rootView;
@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *searchButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *exploreButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *justifiedButton;
 
 
 @property(nonatomic, strong) NSMutableDictionary *searchResults;
@@ -47,16 +48,25 @@
     [_searchBar setDelegate:self];
     
     UINib * nib = [UINib nibWithNibName:@"FlickrCollectionViewCell" bundle:nil];
-    //[self.collectionView registerClass:[FlickrCollectionViewCell class] forCellWithReuseIdentifier:@"FlickrCollectionViewCell"];
+
     [_collectionView registerNib:nib forCellWithReuseIdentifier:@"FlickrCollectionViewCell"];
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
-   // _collectionView.collectionViewLayout = [[JustifiedLayout alloc] init];
-    _collectionView.collectionViewLayout = [[StackLayout alloc] init];
+
+    
+    //In storyboard, select the direction to be horizontal, so it will fill the column in Y direction first
+    //and then will automatically continue in the x direction.
+    
+    //this doesn't apply if the FlowLayout direction is vertical.
+    //for the justified view implementation, use vertical direction and then apply the cell size.
+    
     
     //wire up explore button
     [_exploreButton setTarget:self];
     [_exploreButton setAction:@selector(showExplorePhotos:)];
+    
+    [_justifiedButton setTarget:self];
+    [_justifiedButton setAction:@selector(showJustifiedLayout:)];
 }
 
 - (void)styleViews {
@@ -72,9 +82,11 @@
     
     [self.searchButton setBackgroundImage:shareButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     [self.exploreButton setBackgroundImage:shareButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [self.justifiedButton setBackgroundImage:shareButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     
     UIImage *textFieldImage = [[UIImage imageNamed:@"search_field.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     [self.searchBar setBackgroundImage:textFieldImage];
+    
     _collectionView.backgroundColor = [UIColor clearColor];
 }
 
@@ -124,6 +136,16 @@
     }
 }
 
+
+-(IBAction)showJustifiedLayout:(id)sender {
+    
+    JustifiedViewController* target = [[JustifiedViewController alloc] init];
+    target.searches = [_searches copy];
+    target.searchResults = [_searchResults copy];
+    
+    [self.navigationController showViewController:target sender:self];
+}
+
 #pragma mark - UICollectionView Datasource
 // 1
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
@@ -163,13 +185,12 @@
 
 // 1
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *searchTerm = self.searches[indexPath.section];
-    FlickrPhoto *photo =
-    self.searchResults[searchTerm][indexPath.row];
-    // 2
-    CGSize retval = photo.thumbnail.size.width > 0 ? photo.thumbnail.size : CGSizeMake(100, 100);
-    
-    return [self adjustify:retval];
+    CGSize retval = CGSizeMake(100, 100);
+    if(indexPath.row % 3 !=0 ) {
+        retval.height = 48;
+        retval.width = 48;
+    }
+    return retval;
 }
 //Begin: ensure there is 2.0 spacing between cells
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
@@ -185,17 +206,5 @@
 (UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     return UIEdgeInsetsMake(0,0,0,0);  // top, left, bottom, right
 }
-
-//End: ensure there is 2.0 spacing between cells
-
--(CGSize) adjustify:(CGSize)size {
-    int width = size.width;
-    int height = size.height;
-    float ratio = (float)width / (float)height;
-    size.height = MAX_HEIGHT;
-    size.width = ratio * size.height;
-    return size;
-}
-
 
 @end

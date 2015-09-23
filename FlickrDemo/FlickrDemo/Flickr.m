@@ -13,7 +13,7 @@
 #define kFlickrAuthToken @"72157658554815318-afb7bea353cb2c31"
 #define kFlickrApiSig @"6eb4a2d98601d754ebb3438d648aca00"
 
-#define kExploreUrl @"https://api.flickr.com/services/rest/?method=flickr.interestingness.getList&api_key=66d3ec0189e4f774c31cd0b22742e8b9&format=json&nojsoncallback=1&auth_token=72157658554815318-afb7bea353cb2c31&api_sig=f658626fcec3d0c1409ae50036ca0040"
+#define kExploreUrl @"https://api.flickr.com/services/rest/?method=flickr.interestingness.getList&api_key=5e96778119141da3aa23405aaf56bb80&format=json&nojsoncallback=1&auth_token=72157656681102703-0562de78c0f28afb&api_sig=33e27860efecd0694670f8c3e2bf7f98"
 
 @implementation Flickr
 
