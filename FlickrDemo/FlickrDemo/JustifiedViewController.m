@@ -73,15 +73,13 @@
     
     [self.rows removeAllObjects];
     [self.items removeAllObjects];
-    
-    NSArray * photos = _searchResults[_searches[0]];
-    
+
     __block NSMutableArray *row = [NSMutableArray array];
     
     __block CGFloat maxWidth = _collectionView.contentSize.width;
     
     __block CGFloat x = 0;
-    [photos enumerateObjectsUsingBlock:^(FlickrPhoto* photo, NSUInteger idx, BOOL *stop) {
+    [_photos enumerateObjectsUsingBlock:^(FlickrPhoto* photo, NSUInteger idx, BOOL *stop) {
         
         CGSize size = photo.thumbnail.size;
 
@@ -104,7 +102,7 @@
             x = currentSize;
         }
         
-        if( idx == photos.count - 1) {
+        if( idx == _photos.count - 1) {
             //add the last row
             NSLog(@"create row end at: %lu, right = %f, count= %ld", (unsigned long)idx, x, [row count]);
             JustifiedRow* rowObject = [JustifiedRow initWithArray:row endIndex:idx-1];
@@ -140,15 +138,11 @@
         return [_items count];
     }
     
-    return [_searchResults[_searches[section]] count];
+    return [_photos count];
 }
 // 2
 - (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView {
-    if (_layoutType == kStrictSpacing) {
-        return 1;
-    }
-    
-    return [_searches count];
+    return 1;
 }
 // 3
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -160,7 +154,7 @@
         JustifiedItem *item = _items[indexPath.row];
         photo = item.photo;
     } else {
-        photo = _searchResults[_searches[indexPath.section]][indexPath.row];
+        photo = _photos[indexPath.row];
     }
     
     [cell setPhotoInfo:photo];
@@ -193,7 +187,7 @@
         JustifiedItem *item = _items[indexPath.row];
         return item.size;
     } else {
-        FlickrPhoto *photo = _searchResults[_searches[indexPath.section]][indexPath.row];
+        FlickrPhoto *photo = _photos[indexPath.row];
         
         if (photo.thumbnail == nil) {
             return CGSizeMake(100, 100);

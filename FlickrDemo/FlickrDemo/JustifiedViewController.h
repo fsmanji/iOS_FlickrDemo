@@ -18,8 +18,7 @@ typedef NS_ENUM(NSUInteger, JustifiedType) {
 
 @interface JustifiedViewController : UIViewController
 
-@property(nonatomic, strong) NSMutableDictionary *searchResults;
-@property(nonatomic, strong) NSMutableArray *searches;
+@property(nonatomic, strong) NSArray *photos;
 
 @property JustifiedType layoutType;
 

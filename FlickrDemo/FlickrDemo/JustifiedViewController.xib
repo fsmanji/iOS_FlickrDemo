@@ -16,7 +16,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="yEm-hX-TUG">
-                    <rect key="frame" x="5" y="80" width="590" height="515"/>
+                    <rect key="frame" x="0.0" y="80" width="600" height="515"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="590" id="5GA-Fx-YL2"/>
                     </constraints>
@@ -38,8 +38,8 @@
                 <constraint firstItem="yEm-hX-TUG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="80" id="ANL-nQ-F3D"/>
                 <constraint firstAttribute="bottom" secondItem="yEm-hX-TUG" secondAttribute="bottom" constant="5" id="aQy-fM-3jB"/>
                 <constraint firstAttribute="trailing" secondItem="yEm-hX-TUG" secondAttribute="trailing" constant="5" id="hk1-Wt-SEE"/>
-                <constraint firstAttribute="trailing" secondItem="yEm-hX-TUG" secondAttribute="trailing" constant="5" id="uC0-pY-WfK"/>
-                <constraint firstItem="yEm-hX-TUG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="5" id="xW0-3o-Nra"/>
+                <constraint firstAttribute="trailing" secondItem="yEm-hX-TUG" secondAttribute="trailing" id="uC0-pY-WfK"/>
+                <constraint firstItem="yEm-hX-TUG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="xW0-3o-Nra"/>
             </constraints>
             <variation key="default">
                 <mask key="constraints">

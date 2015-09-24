@@ -159,8 +159,7 @@
 -(IBAction)showJustifiedLayout:(id)sender {
     
     JustifiedViewController* target = [[JustifiedViewController alloc] init];
-    target.searches = [_searches copy];
-    target.searchResults = [_searchResults copy];
+    target.photos = _searchResults[_searches[0]];
     
     if (sender == _justifiedButton) {
         target.layoutType = kStrictSpacing;
