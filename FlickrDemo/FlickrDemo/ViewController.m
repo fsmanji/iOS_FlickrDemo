@@ -14,6 +14,7 @@
 #import "StackLayout.h"
 #import "JustifiedViewController.h"
 #import "UIAlertView+FSMANJI.h"
+#import "MBProgressHUD.h"
 
 @interface ViewController () <UISearchBarDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (strong, nonatomic) IBOutlet UIView *rootView;
@@ -108,7 +109,11 @@
 }
 
 -(IBAction)showExplorePhotos:(id)sender {
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
     [_flickr exploreWithCompletionBlock:^(NSArray *results, NSError *error) {
+        
         if(results && [results count] > 0) {
             NSString * searchTerm = @"explore";
             if(![self.searches containsObject:searchTerm]) {
@@ -118,6 +123,7 @@
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
                 [_collectionView reloadData];
             });
         } else {
@@ -133,24 +139,28 @@
     [_searchBar endEditing:YES];
     [_searchBar resignFirstResponder];
     
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
     NSString * query = searchBar.text;
     if (query && query.length > 0) {
         [_flickr searchFlickrForTerm:query completionBlock:^(NSString *searchTerm, NSArray *results, NSError *error) {
+            
             if(results && [results count] > 0) {
-            // 2
-            if(![self.searches containsObject:searchTerm]) {
-                NSLog(@"Found %ld photos matching %@", [results count],searchTerm);
-                [self.searches insertObject:searchTerm atIndex:0];
-                self.searchResults[searchTerm] = results;
+
+                if(![self.searches containsObject:searchTerm]) {
+                    NSLog(@"Found %ld photos matching %@", [results count],searchTerm);
+                    [self.searches insertObject:searchTerm atIndex:0];
+                    self.searchResults[searchTerm] = results;
+                }
+
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    [_collectionView reloadData];
+                });
+            } else {
+                NSLog(@"Error searching Flickr: %@", error.localizedDescription);
+                [UIAlertView showAlert:self with:@"Flickr APIKey Expired" withMessage:@"Please replace the 'kApiKey/kAuthToken/kApiSig' with the latest ones."];
             }
-            // 3
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [_collectionView reloadData];
-            });
-        } else { // 1
-            NSLog(@"Error searching Flickr: %@", error.localizedDescription);
-            [UIAlertView showAlert:self with:@"Flickr APIKey Expired" withMessage:@"Please replace the 'kApiKey/kAuthToken/kApiSig' with the latest ones."];
-        }
         }];
     }
 }
