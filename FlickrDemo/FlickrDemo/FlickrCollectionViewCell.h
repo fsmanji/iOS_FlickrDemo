@@ -12,7 +12,6 @@
 @interface FlickrCollectionViewCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
-
 @property FlickrPhoto *photo;
 
 -(void)setPhotoInfo:(FlickrPhoto *)photo;

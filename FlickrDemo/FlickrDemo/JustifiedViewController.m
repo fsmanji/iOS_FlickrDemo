@@ -43,8 +43,11 @@
     _rows = [NSMutableArray array];
     _items = [NSMutableArray array];
     
-    //_collectionView.collectionViewLayout = [[JustifiedLayout alloc] init];
-    //_collectionView.collectionViewLayout = [[StackLayout alloc] init];
+    if (_layoutType == kLeftAligned) {
+        _collectionView.collectionViewLayout = [[JustifiedLayout alloc] init];
+        //_collectionView.collectionViewLayout = [[StackLayout alloc] init];
+    }
+
 
     self.navigationItem.title = @"Flickr Interestingness";
     
@@ -59,7 +62,11 @@
     
     //or you can only get correct size after reloadData() or you use fixed width.
     
-    [self justifyCollectionView];
+    if (_layoutType == kStrictSpacing) {
+        [self justifyCollectionView];
+    }
+    
+    [_collectionView reloadData];
 }
 
 -(void)justifyCollectionView {
@@ -113,39 +120,50 @@
             [self.items addObject:item];
         }];
     }];
-    
-    
-    [_collectionView reloadData];
+  
 }
 
 
 - (void)deviceOrientationDidChange:(NSNotification*)note
 {
     [_collectionView.collectionViewLayout invalidateLayout];
-    [self justifyCollectionView];
+
+    if (_layoutType == kStrictSpacing) {
+        [self justifyCollectionView];
+    }
 }
 
 #pragma mark - UICollectionView Datasource
 // 1
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
-    //JustifiedRow * row = self.rows[section];
-    //return row.items.count;
-    return [_items count];
+    if (_layoutType == kStrictSpacing) {
+        return [_items count];
+    }
+    
+    return [_searchResults[_searches[section]] count];
 }
 // 2
 - (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView {
-    //return _rows.count;
-    return 1;
+    if (_layoutType == kStrictSpacing) {
+        return 1;
+    }
+    
+    return [_searches count];
 }
 // 3
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     FlickrCollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"FlickrCollectionViewCell" forIndexPath:indexPath];
-    //JustifiedRow * row = self.rows[indexPath.section];
-    //JustifiedItem *item = row.items[indexPath.row];
     
-    JustifiedItem *item = _items[indexPath.row];
+    FlickrPhoto *photo;
     
-    [cell setPhotoInfo:item.photo];
+    if (_layoutType == kStrictSpacing) {
+        JustifiedItem *item = _items[indexPath.row];
+        photo = item.photo;
+    } else {
+        photo = _searchResults[_searches[indexPath.section]][indexPath.row];
+    }
+    
+    [cell setPhotoInfo:photo];
     
     cell.backgroundColor = [UIColor whiteColor];
     return cell;
@@ -171,15 +189,27 @@
 
 // 1
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    //JustifiedRow * row = self.rows[indexPath.section];
-    //JustifiedItem *item = row.items[indexPath.row];
-    JustifiedItem *item = _items[indexPath.row];
-    return item.size;
-    
+    if (_layoutType == kStrictSpacing) {
+        JustifiedItem *item = _items[indexPath.row];
+        return item.size;
+    } else {
+        FlickrPhoto *photo = _searchResults[_searches[indexPath.section]][indexPath.row];
+        
+        if (photo.thumbnail == nil) {
+            return CGSizeMake(100, 100);
+        }
+        
+        CGSize size = photo.thumbnail.size;
+        
+        if (_layoutType == kFreeSized) {
+            return size;
+        }
+        
+        return [JustifiedItem resizePhoto:photo.thumbnail.size withMaxHeight:MAX_HEIGHT];
+        
+    }
 }
 
-//Begin: ensure there is 2.0 spacing between cells
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
     return kMaxSpacing;
 }
@@ -193,7 +223,5 @@
 (UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     return UIEdgeInsetsMake(0,0,0,0);  // top, left, bottom, right
 }
-
-//End: ensure there is 2.0 spacing between cells
 
 @end
