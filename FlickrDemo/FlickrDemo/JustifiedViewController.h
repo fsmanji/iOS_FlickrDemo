@@ -8,9 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+
+typedef NS_ENUM(NSUInteger, JustifiedType) {
+    kStrictSpacing,
+    kLeftAligned,
+    kStretchSpaces,
+    kFreeSized
+};
+
 @interface JustifiedViewController : UIViewController
 
 @property(nonatomic, strong) NSMutableDictionary *searchResults;
 @property(nonatomic, strong) NSMutableArray *searches;
+
+@property JustifiedType layoutType;
 
 @end

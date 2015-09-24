@@ -39,6 +39,9 @@
                                     <barButtonItem title="Justified3" id="8lO-k9-RLi">
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     </barButtonItem>
+                                    <barButtonItem title="FreeSized" id="cF2-MD-SCZ">
+                                        <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </barButtonItem>
                                 </items>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="c1r-VG-Ki9"/>
@@ -147,7 +150,10 @@
                     <connections>
                         <outlet property="collectionView" destination="9j3-hQ-GvV" id="aMN-ft-smH"/>
                         <outlet property="exploreButton" destination="OWV-Dv-QvV" id="R7f-JL-qgW"/>
+                        <outlet property="freeSizeButton" destination="cF2-MD-SCZ" id="xeI-Bw-Jfi"/>
                         <outlet property="justifiedButton" destination="lAw-h8-ueO" id="3ec-9Q-pdl"/>
+                        <outlet property="justifiedButton2" destination="WIW-Xu-IXQ" id="D8F-Kv-LUS"/>
+                        <outlet property="justifiedButton3" destination="8lO-k9-RLi" id="Tv2-JE-Muh"/>
                         <outlet property="rootView" destination="8bC-Xf-vdC" id="fuC-ag-zPV"/>
                         <outlet property="searchBar" destination="5gb-cp-xLL" id="Mw5-eV-EMT"/>
                         <outlet property="searchButton" destination="zJK-jF-cLJ" id="ObS-rL-Q58"/>

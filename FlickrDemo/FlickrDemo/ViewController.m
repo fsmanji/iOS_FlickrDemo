@@ -24,7 +24,11 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *searchButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *exploreButton;
+
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *justifiedButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *justifiedButton2;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *justifiedButton3;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *freeSizeButton;
 
 
 @property(nonatomic, strong) NSMutableDictionary *searchResults;
@@ -67,6 +71,15 @@
     
     [_justifiedButton setTarget:self];
     [_justifiedButton setAction:@selector(showJustifiedLayout:)];
+    
+    [_justifiedButton2 setTarget:self];
+    [_justifiedButton2 setAction:@selector(showJustifiedLayout:)];
+    
+    [_justifiedButton3 setTarget:self];
+    [_justifiedButton3 setAction:@selector(showJustifiedLayout:)];
+    
+    [_freeSizeButton setTarget:self];
+    [_freeSizeButton setAction:@selector(showJustifiedLayout:)];
 }
 
 - (void)styleViews {
@@ -82,7 +95,11 @@
     
     [self.searchButton setBackgroundImage:shareButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     [self.exploreButton setBackgroundImage:shareButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    
     [self.justifiedButton setBackgroundImage:shareButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [self.justifiedButton2 setBackgroundImage:shareButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [self.justifiedButton3 setBackgroundImage:shareButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [self.freeSizeButton setBackgroundImage:shareButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     
     UIImage *textFieldImage = [[UIImage imageNamed:@"search_field.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     [self.searchBar setBackgroundImage:textFieldImage];
@@ -144,6 +161,21 @@
     JustifiedViewController* target = [[JustifiedViewController alloc] init];
     target.searches = [_searches copy];
     target.searchResults = [_searchResults copy];
+    
+    if (sender == _justifiedButton) {
+        target.layoutType = kStrictSpacing;
+        
+    } else if (sender == _justifiedButton2) {
+        target.layoutType = kLeftAligned;
+        
+    } else if (sender == _justifiedButton3) {
+        target.layoutType = kStretchSpaces;
+        
+    } else { //free sized cells
+        
+        target.layoutType = kFreeSized;
+    }
+    
     
     [self.navigationController showViewController:target sender:self];
 }

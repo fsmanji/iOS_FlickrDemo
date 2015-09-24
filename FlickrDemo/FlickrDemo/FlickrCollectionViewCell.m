@@ -12,6 +12,14 @@
 
 @implementation FlickrCollectionViewCell
 
+/**
+ *
+ * You must call registerNib:nib to regist, don't use registerClass, otherwise you always get empty view
+ *
+ * [_collectionView registerNib:nib forCellWithReuseIdentifier:@"FlickrCollectionViewCell"];
+ *
+ */
+
 
 -(void)setPhotoInfo:(FlickrPhoto *)photo {
     

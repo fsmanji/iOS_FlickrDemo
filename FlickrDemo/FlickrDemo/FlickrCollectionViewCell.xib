@@ -12,38 +12,24 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="310" height="335"/>
                 <subviews>
-                    <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xvF-eJ-h6l">
-                        <rect key="frame" x="0.0" y="36" width="310" height="299"/>
-                    </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="750" image="pushpin.png" translatesAutoresizingMaskIntoConstraints="NO" id="Nvp-rM-CAM">
-                        <rect key="frame" x="0.0" y="0.0" width="310" height="31"/>
+                    <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xvF-eJ-h6l">
+                        <rect key="frame" x="0.0" y="0.0" width="308" height="335"/>
                     </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="Nvp-rM-CAM" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Ccs-2v-p6Z"/>
-                <constraint firstAttribute="bottom" secondItem="xvF-eJ-h6l" secondAttribute="bottom" id="LdQ-gF-fEa"/>
-                <constraint firstAttribute="trailing" secondItem="Nvp-rM-CAM" secondAttribute="trailing" id="MBg-hm-B0K"/>
-                <constraint firstItem="xvF-eJ-h6l" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Xab-u8-30n"/>
-                <constraint firstAttribute="bottom" secondItem="Nvp-rM-CAM" secondAttribute="bottom" constant="5" id="ddf-vS-dwY"/>
-                <constraint firstAttribute="trailing" secondItem="xvF-eJ-h6l" secondAttribute="trailing" id="hqJ-Xm-HnH"/>
-                <constraint firstItem="xvF-eJ-h6l" firstAttribute="top" secondItem="Nvp-rM-CAM" secondAttribute="bottom" constant="5" id="wT7-Cg-sgY"/>
-                <constraint firstItem="Nvp-rM-CAM" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="xSZ-Ql-q41"/>
+                <constraint firstItem="xvF-eJ-h6l" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="2" id="EVQ-Od-CbI"/>
+                <constraint firstAttribute="bottom" secondItem="xvF-eJ-h6l" secondAttribute="bottom" constant="2" id="MHt-oi-LQW"/>
+                <constraint firstItem="xvF-eJ-h6l" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="2" id="V9p-yD-njA"/>
+                <constraint firstAttribute="trailing" secondItem="xvF-eJ-h6l" secondAttribute="trailing" constant="2" id="XbD-ic-tFR"/>
             </constraints>
             <size key="customSize" width="310" height="335"/>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="ddf-vS-dwY"/>
-                </mask>
-            </variation>
             <connections>
                 <outlet property="imageView" destination="xvF-eJ-h6l" id="iPw-uB-R0e"/>
             </connections>
             <point key="canvasLocation" x="470" y="334.5"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="pushpin.png" width="22" height="31"/>
-    </resources>
 </document>
