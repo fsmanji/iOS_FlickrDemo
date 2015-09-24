@@ -27,5 +27,5 @@ The flickr photos are from these two APIs, you need to get your own api keys or 
 
 ### Walkthrough
 
-![Video Walkthrough](FlickrDemoClient.gif)
+![Video Walkthrough](flickrdemo.gif)
 
