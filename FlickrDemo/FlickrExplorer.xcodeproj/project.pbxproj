@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6239517B89B8F3CD8E3ED29D /* libPods-FlickrDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 041C4941F72AA3ED46204514 /* libPods-FlickrDemo.a */; };
+		B35EA5C61BB9F37F00371F62 /* FlickrPhotoSize.m in Sources */ = {isa = PBXBuildFile; fileRef = B35EA5C51BB9F37F00371F62 /* FlickrPhotoSize.m */; };
 		B362CFB71BB1E23400AD9BAE /* JustifiedLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B362CFB61BB1E23400AD9BAE /* JustifiedLayout.m */; };
 		B362CFBA1BB1F62A00AD9BAE /* StackLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B362CFB91BB1F62A00AD9BAE /* StackLayout.m */; };
 		B362CFBE1BB25C7100AD9BAE /* JustifiedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B362CFBC1BB25C7100AD9BAE /* JustifiedViewController.m */; };
@@ -60,6 +61,8 @@
 
 /* Begin PBXFileReference section */
 		041C4941F72AA3ED46204514 /* libPods-FlickrDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FlickrDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B35EA5C41BB9F37F00371F62 /* FlickrPhotoSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrPhotoSize.h; sourceTree = "<group>"; };
+		B35EA5C51BB9F37F00371F62 /* FlickrPhotoSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrPhotoSize.m; sourceTree = "<group>"; };
 		B362CFB51BB1E23400AD9BAE /* JustifiedLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JustifiedLayout.h; sourceTree = "<group>"; };
 		B362CFB61BB1E23400AD9BAE /* JustifiedLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JustifiedLayout.m; sourceTree = "<group>"; };
 		B362CFB81BB1F62A00AD9BAE /* StackLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackLayout.h; sourceTree = "<group>"; };
@@ -274,6 +277,8 @@
 				B3A2DE871BB0C391006BE0DB /* Flickr.m */,
 				B3A2DE881BB0C391006BE0DB /* FlickrPhoto.h */,
 				B3A2DE891BB0C391006BE0DB /* FlickrPhoto.m */,
+				B35EA5C41BB9F37F00371F62 /* FlickrPhotoSize.h */,
+				B35EA5C51BB9F37F00371F62 /* FlickrPhotoSize.m */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -468,6 +473,7 @@
 				B362CFBE1BB25C7100AD9BAE /* JustifiedViewController.m in Sources */,
 				B362CFBA1BB1F62A00AD9BAE /* StackLayout.m in Sources */,
 				B3A2DE8B1BB0C391006BE0DB /* FlickrPhoto.m in Sources */,
+				B35EA5C61BB9F37F00371F62 /* FlickrPhotoSize.m in Sources */,
 				B362CFB71BB1E23400AD9BAE /* JustifiedLayout.m in Sources */,
 				B362CFC21BB3197E00AD9BAE /* JustifiedRow.m in Sources */,
 				B3A2DE391BB0BF7A006BE0DB /* main.m in Sources */,

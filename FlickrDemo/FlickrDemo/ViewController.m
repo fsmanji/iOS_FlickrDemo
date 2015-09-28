@@ -125,11 +125,10 @@
                 [self.searches insertObject:searchTerm atIndex:0];
                 self.searchResults[searchTerm] = results;
             }
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
+
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
                 [_collectionView reloadData];
-            });
+            
         } else {
             NSLog(@"Error searching Flickr: %@", error.localizedDescription);
             [UIAlertView showAlert:self with:@"Flickr APIKey Expired" withMessage:@"Please replace the 'kExploreUrl' with the latest url on flickr dev site."];
@@ -224,9 +223,6 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-}
-- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
-    // TODO: Deselect item
 }
 
 #pragma mark – UICollectionViewDelegateFlowLayout

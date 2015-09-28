@@ -7,6 +7,7 @@
 //
 
 #import "FlickrPhoto.h"
+#import "FlickrPhotoSize.h"
 
 @implementation FlickrPhoto
 
@@ -33,15 +34,17 @@
     photo.secret = objPhoto[@"secret"];
     photo.photoID = [objPhoto[@"id"] longLongValue];
     
-    NSError * error;
-    NSString *searchURL = [photo flickrPhotoURLForSize:@"m"];
-     NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:searchURL]
-     options:0
-     error:&error];
-     UIImage *image = [UIImage imageWithData:imageData];
-     photo.thumbnail = image;
-    NSLog(@"Downloading photo: %@", photo.title);
+    //parse size info.
+    FlickrPhotoSize *size = [[FlickrPhotoSize alloc] init];
+    size.url_l = objPhoto[@"url_l"];
+    size.url_m = objPhoto[@"url_m"];
     
+    size.size_l = CGSizeMake([objPhoto[@"width_l"] integerValue], [objPhoto[@"height_l"] integerValue]);
+    size.size_m = CGSizeMake([objPhoto[@"width_m"] integerValue], [objPhoto[@"height_m"] integerValue]);
+    
+    photo.size = size;
+    
+    NSLog(@"Photo: %@ - %@", photo.title, size);
     return photo;
 }
 

@@ -8,6 +8,7 @@
 
 #import "JustifiedViewController.h"
 #import "FlickrPhoto.h"
+#import "FlickrPhotoSize.h"
 #import "FlickrCollectionViewCell.h"
 #import "JustifiedLayout.h"
 #import "StackLayout.h"
@@ -47,8 +48,8 @@
         _collectionView.collectionViewLayout = [[JustifiedLayout alloc] init];
         //_collectionView.collectionViewLayout = [[StackLayout alloc] init];
     }
-
-
+    
+    
     self.navigationItem.title = @"Flickr Interestingness";
     
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(deviceOrientationDidChange:) name: UIDeviceOrientationDidChangeNotification object: nil];
@@ -73,7 +74,7 @@
     
     [self.rows removeAllObjects];
     [self.items removeAllObjects];
-
+    
     __block NSMutableArray *row = [NSMutableArray array];
     
     __block CGFloat maxWidth = _collectionView.contentSize.width;
@@ -81,8 +82,8 @@
     __block CGFloat x = 0;
     [_photos enumerateObjectsUsingBlock:^(FlickrPhoto* photo, NSUInteger idx, BOOL *stop) {
         
-        CGSize size = photo.thumbnail.size;
-
+        CGSize size = photo.size.size_m;
+        
         JustifiedItem* item = [JustifiedItem initWithData:photo originalSize:size maxHeight:MAX_HEIGHT];
         
         NSLog(@"processing item: %lu", (unsigned long)idx);
@@ -118,14 +119,14 @@
             [self.items addObject:item];
         }];
     }];
-  
+    
 }
 
 
 - (void)deviceOrientationDidChange:(NSNotification*)note
 {
     [_collectionView.collectionViewLayout invalidateLayout];
-
+    
     if (_layoutType == kStrictSpacing) {
         [self justifyCollectionView];
     }
@@ -189,17 +190,17 @@
     } else {
         FlickrPhoto *photo = _photos[indexPath.row];
         
-        if (photo.thumbnail == nil) {
+        if (photo.size == nil) {
             return CGSizeMake(100, 100);
         }
         
-        CGSize size = photo.thumbnail.size;
+        CGSize size_m = photo.size.size_m;
         
         if (_layoutType == kFreeSized) {
-            return size;
+            return size_m;
         }
         
-        return [JustifiedItem resizePhoto:photo.thumbnail.size withMaxHeight:MAX_HEIGHT];
+        return [JustifiedItem resizePhoto:size_m withMaxHeight:MAX_HEIGHT];
         
     }
 }

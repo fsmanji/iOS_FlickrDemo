@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+@class FlickrPhotoSize;
+
 @interface FlickrPhoto : NSObject
 @property(nonatomic,strong) UIImage *thumbnail;
 @property(nonatomic,strong) UIImage *largeImage;
@@ -19,6 +21,8 @@
 @property(nonatomic) NSInteger farm;
 @property(nonatomic) NSInteger server;
 @property(nonatomic,strong) NSString *secret;
+
+@property FlickrPhotoSize *size;
 
 - (NSString *)flickrPhotoURLForSize:(NSString *) size;
 

@@ -22,9 +22,6 @@ typedef void (^FlickrExploreCompletionBlock)(NSArray *results, NSError *error);
 @property (nonatomic, weak) FlickrKit* apiKit;
 
 - (void)searchFlickrForTerm:(NSString *) term completionBlock:(FlickrSearchCompletionBlock) completionBlock;
-+ (void)loadImageForPhoto:(FlickrPhoto *)flickrPhoto thumbnail:(BOOL)thumbnail completionBlock:(FlickrPhotoCompletionBlock) completionBlock;
-
-
 - (void)exploreWithCompletionBlock:(FlickrExploreCompletionBlock) completionBlock;;
 
 + (id)api;

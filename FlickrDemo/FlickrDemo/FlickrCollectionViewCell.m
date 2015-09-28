@@ -9,6 +9,7 @@
 #import "FlickrCollectionViewCell.h"
 #import "FlickrPhoto.h"
 #import <UIImageView+AFNetworking.h>
+#import "FlickrPhotoSize.h"
 
 @implementation FlickrCollectionViewCell
 
@@ -24,9 +25,10 @@
 -(void)setPhotoInfo:(FlickrPhoto *)photo {
     
     _photo = photo;
-    NSString * url = [photo flickrPhotoURLForSize:@"m"];
-    //[_imageView setImageWithURL:[NSURL URLWithString:url]];
-    _imageView.image = photo.thumbnail;
+    //NSString * url = [photo flickrPhotoURLForSize:@"m"];
+    [_imageView setImageWithURL:[NSURL URLWithString:photo.size.url_m] placeholderImage:[UIImage imageNamed:@"bg_cork"]];
+
+    //_imageView.image = photo.thumbnail;
 }
 
 - (id)initWithFrame:(CGRect)aRect

@@ -64,44 +64,10 @@
     }];
 }
 
-+ (void)loadImageForPhoto:(FlickrPhoto *)flickrPhoto thumbnail:(BOOL)thumbnail completionBlock:(FlickrPhotoCompletionBlock) completionBlock
-{
-    
-    NSString *size = thumbnail ? @"m" : @"b";
-    
-    NSString *photoURL = [flickrPhoto flickrPhotoURLForSize:size];
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    
-    dispatch_async(queue, ^{
-        NSError *error = nil;
-        
-        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:photoURL]
-                                                  options:0
-                                                    error:&error];
-        if(error)
-        {
-            completionBlock(nil,error);
-        }
-        else
-        {
-            UIImage *image = [UIImage imageWithData:imageData];
-            if([size isEqualToString:@"m"])
-            {
-                flickrPhoto.thumbnail = image;
-            }
-            else
-            {
-                flickrPhoto.largeImage = image;
-            }
-            completionBlock(image,nil);
-        }
-        
-    });
-}
-
 
 -(void)exploreWithCompletionBlock:(FlickrExploreCompletionBlock)completionBlock {
     FKFlickrInterestingnessGetList *interesting = [[FKFlickrInterestingnessGetList alloc] init];
+    interesting.extras = kDefaultExtras;
     
     [_apiKit call:interesting completion:^(NSDictionary *response, NSError *error) {
         // Note this is not the main thread!
