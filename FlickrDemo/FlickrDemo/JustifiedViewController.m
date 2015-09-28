@@ -33,51 +33,53 @@
 
 @implementation JustifiedViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UINib * nib = [UINib nibWithNibName:@"FlickrCollectionViewCell" bundle:nil];
-    
-    [_collectionView registerNib:nib forCellWithReuseIdentifier:@"FlickrCollectionViewCell"];
-    _collectionView.delegate = self;
-    _collectionView.dataSource = self;
     
     _rows = [NSMutableArray array];
     _items = [NSMutableArray array];
+
+    [self startJustifying];
+    
+    [self configureCollectionView];
+    
+    self.navigationItem.title = @"Popular";
+    
+    [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(deviceOrientationDidChange:) name: UIDeviceOrientationDidChangeNotification object: nil];
+}
+
+-(void) startJustifying {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self justifyDataSource];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [_collectionView reloadData];
+        });
+    });
+}
+
+-(void)configureCollectionView {
+    
+    UINib * nib = [UINib nibWithNibName:@"FlickrCollectionViewCell" bundle:nil];
+    [_collectionView registerNib:nib forCellWithReuseIdentifier:@"FlickrCollectionViewCell"];
+    _collectionView.delegate = self;
+    _collectionView.dataSource = self;
     
     if (_layoutType == kLeftAligned) {
         _collectionView.collectionViewLayout = [[JustifiedLayout alloc] init];
         //_collectionView.collectionViewLayout = [[StackLayout alloc] init];
     }
-    
-    
-    self.navigationItem.title = @"Flickr Interestingness";
-    
-    [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(deviceOrientationDidChange:) name: UIDeviceOrientationDidChangeNotification object: nil];
 }
 
-
--(void)viewDidAppear:(BOOL)animated {
-    //when view did appear, the collection view has the correct size.
-    //especally on iPAD, the content size returned from viewDidLoad is the portrait mode size,
-    //so need to wait util viewDidAppear when screen is rotated to landscope mode.
-    
-    //or you can only get correct size after reloadData() or you use fixed width.
-    
-    if (_layoutType == kStrictSpacing) {
-        [self justifyCollectionView];
-    }
-    
-    [_collectionView reloadData];
-}
-
--(void)justifyCollectionView {
+-(void)justifyDataSource {
     
     [self.rows removeAllObjects];
     [self.items removeAllObjects];
     
     __block NSMutableArray *row = [NSMutableArray array];
     
-    __block CGFloat maxWidth = _collectionView.contentSize.width;
+    __block CGFloat maxWidth =  [[UIScreen mainScreen] bounds].size.width; //_collectionView.contentSize.width;
     
     __block CGFloat x = 0;
     [_photos enumerateObjectsUsingBlock:^(FlickrPhoto* photo, NSUInteger idx, BOOL *stop) {
@@ -128,7 +130,7 @@
     [_collectionView.collectionViewLayout invalidateLayout];
     
     if (_layoutType == kStrictSpacing) {
-        [self justifyCollectionView];
+        [self startJustifying];
     }
 }
 
