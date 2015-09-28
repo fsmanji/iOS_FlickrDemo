@@ -29,6 +29,8 @@
 //this contains array of JustifiedItems, so if your collection has its own sections, you use this to get all items regardless of section.
 @property(nonatomic, strong) NSMutableArray *items;
 
+@property BOOL justifyInProgress;
+
 @end
 
 @implementation JustifiedViewController
@@ -50,11 +52,19 @@
 }
 
 -(void) startJustifying {
+    if (_justifyInProgress) {
+        return;
+    }
+    _justifyInProgress = YES;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self justifyDataSource];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            [_collectionView reloadData];
+            _justifyInProgress = NO;
+            if (_layoutType == kStrictSpacing) {
+                [_collectionView.collectionViewLayout invalidateLayout];
+                [_collectionView reloadData];
+            }
         });
     });
 }
@@ -127,8 +137,7 @@
 
 - (void)deviceOrientationDidChange:(NSNotification*)note
 {
-    [_collectionView.collectionViewLayout invalidateLayout];
-    
+
     if (_layoutType == kStrictSpacing) {
         [self startJustifying];
     }
@@ -137,8 +146,8 @@
 #pragma mark - UICollectionView Datasource
 // 1
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
-    if (_layoutType == kStrictSpacing) {
-        return [_items count];
+    if (_layoutType == kStrictSpacing && _justifyInProgress) {
+        return 0;
     }
     
     return [_photos count];
@@ -187,6 +196,9 @@
 // 1
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (_layoutType == kStrictSpacing) {
+        if (_justifyInProgress) {
+            return CGSizeMake(0, 0);
+        }
         JustifiedItem *item = _items[indexPath.row];
         return item.size;
     } else {
