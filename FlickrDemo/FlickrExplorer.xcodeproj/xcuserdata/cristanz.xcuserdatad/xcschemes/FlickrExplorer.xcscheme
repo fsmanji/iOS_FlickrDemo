@@ -15,23 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B3A2DE321BB0BF7A006BE0DB"
-               BuildableName = "FlickrDemo.app"
-               BlueprintName = "FlickrDemo"
-               ReferencedContainer = "container:FlickrDemo.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B3A2DE4B1BB0BF7B006BE0DB"
-               BuildableName = "FlickrDemoTests.xctest"
-               BlueprintName = "FlickrDemoTests"
-               ReferencedContainer = "container:FlickrDemo.xcodeproj">
+               BuildableName = "FlickrExplorer.app"
+               BlueprintName = "FlickrExplorer"
+               ReferencedContainer = "container:FlickrExplorer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -42,24 +28,14 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B3A2DE4B1BB0BF7B006BE0DB"
-               BuildableName = "FlickrDemoTests.xctest"
-               BlueprintName = "FlickrDemoTests"
-               ReferencedContainer = "container:FlickrDemo.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B3A2DE321BB0BF7A006BE0DB"
-            BuildableName = "FlickrDemo.app"
-            BlueprintName = "FlickrDemo"
-            ReferencedContainer = "container:FlickrDemo.xcodeproj">
+            BuildableName = "FlickrExplorer.app"
+            BlueprintName = "FlickrExplorer"
+            ReferencedContainer = "container:FlickrExplorer.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -77,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B3A2DE321BB0BF7A006BE0DB"
-            BuildableName = "FlickrDemo.app"
-            BlueprintName = "FlickrDemo"
-            ReferencedContainer = "container:FlickrDemo.xcodeproj">
+            BuildableName = "FlickrExplorer.app"
+            BlueprintName = "FlickrExplorer"
+            ReferencedContainer = "container:FlickrExplorer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -96,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B3A2DE321BB0BF7A006BE0DB"
-            BuildableName = "FlickrDemo.app"
-            BlueprintName = "FlickrDemo"
-            ReferencedContainer = "container:FlickrDemo.xcodeproj">
+            BuildableName = "FlickrExplorer.app"
+            BlueprintName = "FlickrExplorer"
+            ReferencedContainer = "container:FlickrExplorer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

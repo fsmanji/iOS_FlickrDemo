@@ -9,8 +9,15 @@
 #import "Flickr.h"
 #import "FlickrPhoto.h"
 
-#define kFlickrAPIKey @"92d8aa6f87c042c896ae5893a2f51f6b"
-#define kFlickrAPISecret @"8d08e88f3c9960de"
+#define kFlickrAPIKey @"e94b89904a09519e72a4425f2d05722c"
+#define kFlickrAPISecret @"20bd7d2b634f4f35"
+
+//default extras: url_[] will return the photo dimention together with url.
+#define kDefaultExtras @"url_m, url_l"
+//if need to fetch original photo, append below extras
+#define kOriginalPhotoExtras @"url_o, original_format"
+
+#define kSortBy @"relevance"
 
 @implementation Flickr
 
@@ -30,7 +37,9 @@
 {
     FKFlickrPhotosSearch * search = [[FKFlickrPhotosSearch alloc] init];
     search.text = term;
-    search.sort = @"relevance";
+    search.sort = kSortBy;
+    search.extras = kDefaultExtras;
+    
     [_apiKit call:search completion:^(NSDictionary *response, NSError *error) {
         
         if(error){
