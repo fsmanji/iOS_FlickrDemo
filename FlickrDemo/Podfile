@@ -4,6 +4,7 @@
 target 'FlickrDemo' do
 pod 'AFNetworking', '2.2.1'
 pod 'MBProgressHUD', '~> 0.9.1'
+pod 'FlickrKit'
 end
 
 target 'FlickrDemoTests' do

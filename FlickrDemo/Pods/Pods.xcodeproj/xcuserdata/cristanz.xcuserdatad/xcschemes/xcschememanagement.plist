@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>FlickrKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,17 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>13457FD4CBF7E0A261EE068399839F32</key>
+		<key>1A6D7F87AB7C53D298F61F726C61945D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>525B3B839070E35C683E94AB0F64E5BD</key>
+		<key>4A2227C10DCBDFA714D0750BBA3A975F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5A88D6D9DD5DA440A50ADBBC398D5E33</key>
+		<key>4EF0A071F01E208BE8B38291B29421B2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>78E7CCC53D6A5825A0429C242F500C5B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

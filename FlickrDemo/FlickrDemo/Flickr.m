@@ -9,77 +9,50 @@
 #import "Flickr.h"
 #import "FlickrPhoto.h"
 
-#define kFlickrAPIKey @"66d3ec0189e4f774c31cd0b22742e8b9"
-#define kFlickrAuthToken @"72157658554815318-afb7bea353cb2c31"
-#define kFlickrApiSig @"6eb4a2d98601d754ebb3438d648aca00"
-
-#define kExploreUrl @"https://api.flickr.com/services/rest/?method=flickr.interestingness.getList&api_key=5e96778119141da3aa23405aaf56bb80&format=json&nojsoncallback=1&auth_token=72157656681102703-0562de78c0f28afb&api_sig=33e27860efecd0694670f8c3e2bf7f98"
+#define kFlickrAPIKey @"92d8aa6f87c042c896ae5893a2f51f6b"
+#define kFlickrAPISecret @"8d08e88f3c9960de"
 
 @implementation Flickr
 
 +(id)api {
     static Flickr *api = nil;
     @synchronized(self) {
-        if (api == nil)
+        if (api == nil) {
             api = [[self alloc] init];
+            [[FlickrKit sharedFlickrKit] initializeWithAPIKey:kFlickrAPIKey sharedSecret:kFlickrAPISecret];
+            api.apiKit = [FlickrKit sharedFlickrKit];
+        }
     }
     return api;
 }
 
-+ (NSString *)flickrSearchURLForSearchTerm:(NSString *) searchTerm
-{
-    searchTerm = [searchTerm stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    return [NSString stringWithFormat:@"https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=%@&text=%@&format=json&nojsoncallback=1&auth_token=%@&api_sig=%@",
-            kFlickrAPIKey,searchTerm,kFlickrAuthToken,kFlickrApiSig];
-}
-
-
 - (void)searchFlickrForTerm:(NSString *) term completionBlock:(FlickrSearchCompletionBlock) completionBlock
 {
-    NSString *searchURL = [Flickr flickrSearchURLForSearchTerm:term];
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    
-    dispatch_async(queue, ^{
-        NSError *error = nil;
-        NSString *searchResultString = [NSString stringWithContentsOfURL:[NSURL URLWithString:searchURL]
-                                                           encoding:NSUTF8StringEncoding
-                                                              error:&error];
-        if (error != nil) {
-            completionBlock(term,nil,error);
-        }
-        else
-        {
-            // Parse the JSON Response
-            NSData *jsonData = [searchResultString dataUsingEncoding:NSUTF8StringEncoding];
-            NSDictionary *searchResultsDict = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                                              options:kNilOptions
-                                                                                error:&error];
-            if(error != nil)
-            {
+    FKFlickrPhotosSearch * search = [[FKFlickrPhotosSearch alloc] init];
+    search.text = term;
+    search.sort = @"relevance";
+    [_apiKit call:search completion:^(NSDictionary *response, NSError *error) {
+        
+        if(error){
+            dispatch_async(dispatch_get_main_queue(), ^{
                 completionBlock(term,nil,error);
-            }
-            else
+            });
+        } else {
+            NSArray *objPhotos = response[@"photos"][@"photo"];
+            NSMutableArray *flickrPhotos = [NSMutableArray array];
+            for(NSMutableDictionary *objPhoto in objPhotos)
             {
-                NSString * status = searchResultsDict[@"stat"];
-                if ([status isEqualToString:@"fail"]) {
-                    NSError * error = [[NSError alloc] initWithDomain:@"FlickrSearch" code:0 userInfo:@{NSLocalizedFailureReasonErrorKey: searchResultsDict[@"message"]}];
-                    completionBlock(term, nil, error);
-                } else {
+                FlickrPhoto *photo = [FlickrPhoto initWithJson:objPhoto];
                 
-                    NSArray *objPhotos = searchResultsDict[@"photos"][@"photo"];
-                    NSMutableArray *flickrPhotos = [@[] mutableCopy];
-                    for(NSMutableDictionary *objPhoto in objPhotos)
-                    {
-                        FlickrPhoto *photo = [FlickrPhoto initWithJson:objPhoto];
-                        
-                        [flickrPhotos addObject:photo];
-                    }
-                    
-                    completionBlock(term,flickrPhotos,nil);
-                }
+                [flickrPhotos addObject:photo];
             }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completionBlock(term,flickrPhotos,nil);
+            });
+            
         }
-    });
+        
+    }];
 }
 
 + (void)loadImageForPhoto:(FlickrPhoto *)flickrPhoto thumbnail:(BOOL)thumbnail completionBlock:(FlickrPhotoCompletionBlock) completionBlock
@@ -117,51 +90,34 @@
     });
 }
 
--(void)exploreWithCompletionBlock:(FlickrExploreCompletionBlock)completionBlock {
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    
-    dispatch_async(queue, ^{
-        NSError *error = nil;
-        NSString *responseString = [NSString stringWithContentsOfURL:[NSURL URLWithString:kExploreUrl]
-                                                                encoding:NSUTF8StringEncoding
-                                                                   error:&error];
-        if (error != nil) {
-            completionBlock(nil,error);
-        }
-        else
-        {
-            // Parse the JSON Response
-            NSData *jsonData = [responseString dataUsingEncoding:NSUTF8StringEncoding];
-            NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                                              options:kNilOptions
-                                                                                error:&error];
-            if(error != nil)
-            {
-                completionBlock(nil,error);
-            }
-            else
-            {
-                NSString * status = dictionary[@"stat"];
-                if ([status isEqualToString:@"fail"]) {
-                    NSError * error = [[NSError alloc] initWithDomain:@"FlickrSearch" code:0 userInfo:@{NSLocalizedFailureReasonErrorKey: dictionary[@"message"]}];
-                    completionBlock(nil, error);
-                } else {
-                    
-                    NSArray *objPhotos = dictionary[@"photos"][@"photo"];
-                    NSMutableArray *flickrPhotos = [@[] mutableCopy];
-                    for(NSMutableDictionary *objPhoto in objPhotos)
-                    {
-                        FlickrPhoto *photo = [FlickrPhoto initWithJson:objPhoto];
-                        
-                        [flickrPhotos addObject:photo];
-                    }
-                    
-                    completionBlock(flickrPhotos,nil);
-                }
-            }
-        }
-    });
 
+-(void)exploreWithCompletionBlock:(FlickrExploreCompletionBlock)completionBlock {
+    FKFlickrInterestingnessGetList *interesting = [[FKFlickrInterestingnessGetList alloc] init];
+    
+    [_apiKit call:interesting completion:^(NSDictionary *response, NSError *error) {
+        // Note this is not the main thread!
+        if(error){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completionBlock(nil,error);
+            });
+        } else {
+            NSArray *objPhotos = response[@"photos"][@"photo"];
+            NSMutableArray *flickrPhotos = [NSMutableArray array];
+            for(NSMutableDictionary *objPhoto in objPhotos)
+            {
+                FlickrPhoto *photo = [FlickrPhoto initWithJson:objPhoto];
+                
+                [flickrPhotos addObject:photo];
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completionBlock(flickrPhotos,nil);
+            });
+            
+        }
+        
+    }];
+    
+    
 }
 
 

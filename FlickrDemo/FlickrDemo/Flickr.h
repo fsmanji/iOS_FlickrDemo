@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import <FlickrKit.h>
+
 @class FlickrPhoto;
 @class UIImage;
 
@@ -17,7 +19,7 @@ typedef void (^FlickrExploreCompletionBlock)(NSArray *results, NSError *error);
 
 @interface Flickr : NSObject
 
-@property(strong) NSString *apiKey;
+@property (nonatomic, weak) FlickrKit* apiKit;
 
 - (void)searchFlickrForTerm:(NSString *) term completionBlock:(FlickrSearchCompletionBlock) completionBlock;
 + (void)loadImageForPhoto:(FlickrPhoto *)flickrPhoto thumbnail:(BOOL)thumbnail completionBlock:(FlickrPhotoCompletionBlock) completionBlock;

@@ -16,6 +16,8 @@
 #import "UIAlertView+FSMANJI.h"
 #import "MBProgressHUD.h"
 
+#import <FlickrKit.h>
+
 @interface ViewController () <UISearchBarDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (strong, nonatomic) IBOutlet UIView *rootView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *shareButton;
@@ -81,6 +83,8 @@
     
     [_freeSizeButton setTarget:self];
     [_freeSizeButton setAction:@selector(showJustifiedLayout:)];
+    
+    
 }
 
 - (void)styleViews {
@@ -193,7 +197,8 @@
 // 1
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
     NSString *searchTerm = self.searches[section];
-    return [self.searchResults[searchTerm] count];
+    NSArray *array = self.searchResults[searchTerm];
+    return [array count];
 }
 // 2
 - (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView {
