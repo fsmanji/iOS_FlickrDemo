@@ -38,6 +38,8 @@
 @property(nonatomic, strong) NSMutableArray *searches;
 @property(nonatomic, strong) Flickr *flickr;
 
+@property (weak, nonatomic) IBOutlet UIView *containerView;
+
 
 @end
 
@@ -55,11 +57,10 @@
     [_searchBar setDelegate:self];
     
     UINib * nib = [UINib nibWithNibName:@"FlickrCollectionViewCell" bundle:nil];
-
+    
     [_collectionView registerNib:nib forCellWithReuseIdentifier:@"FlickrCollectionViewCell"];
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
-
     
     //In storyboard, select the direction to be horizontal, so it will fill the column in Y direction first
     //and then will automatically continue in the x direction.
@@ -84,11 +85,11 @@
     [_freeSizeButton setTarget:self];
     [_freeSizeButton setAction:@selector(showJustifiedLayout:)];
     
-    
+    [self showExplorePhotos:nil];
 }
 
 - (void)styleViews {
-
+    
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_cork.png"]];
     
     UIImage *navBarImage = [[UIImage imageNamed:@"navbar.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(27, 27, 27, 27)];
@@ -112,6 +113,16 @@
     _collectionView.backgroundColor = [UIColor clearColor];
 }
 
+-(void)showExploreInHomeView{
+    JustifiedViewController* target = [[JustifiedViewController alloc] init];
+    target.photos = _searchResults[_searches[0]];
+    target.layoutType = kFreeSized;
+    target.view.frame = self.containerView.bounds;
+    
+    [self addChildViewController:target];
+    [self.containerView addSubview:target.view];
+}
+
 -(IBAction)showExplorePhotos:(id)sender {
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -125,16 +136,18 @@
                 [self.searches insertObject:searchTerm atIndex:0];
                 self.searchResults[searchTerm] = results;
             }
-
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
-                [_collectionView reloadData];
+            
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [_collectionView reloadData];
+            
+            [self showExploreInHomeView];
             
         } else {
             NSLog(@"Error searching Flickr: %@", error.localizedDescription);
             [UIAlertView showAlert:self with:@"Flickr APIKey Expired" withMessage:@"Please replace the 'kExploreUrl' with the latest url on flickr dev site."];
         }
     }];
-
+    
 }
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
@@ -149,13 +162,13 @@
         [_flickr searchFlickrForTerm:query completionBlock:^(NSString *searchTerm, NSArray *results, NSError *error) {
             
             if(results && [results count] > 0) {
-
+                
                 if(![self.searches containsObject:searchTerm]) {
                     NSLog(@"Found %ld photos matching %@", [results count],searchTerm);
                     [self.searches insertObject:searchTerm atIndex:0];
                     self.searchResults[searchTerm] = results;
                 }
-
+                
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [MBProgressHUD hideHUDForView:self.view animated:YES];
                     [_collectionView reloadData];
@@ -210,7 +223,7 @@
     [cell setPhotoInfo:self.searchResults[searchTerm][indexPath.row]];
     cell.backgroundColor = [UIColor whiteColor];
     return cell;
-
+    
 }
 // 4
 /*- (UICollectionReusableView *)collectionView:
