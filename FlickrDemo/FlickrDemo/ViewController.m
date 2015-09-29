@@ -61,6 +61,7 @@
     [_collectionView registerNib:nib forCellWithReuseIdentifier:@"FlickrCollectionViewCell"];
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
+    _collectionView.hidden = YES;
     
     //In storyboard, select the direction to be horizontal, so it will fill the column in Y direction first
     //and then will automatically continue in the x direction.
@@ -116,7 +117,7 @@
 -(void)showExploreInHomeView{
     JustifiedViewController* target = [[JustifiedViewController alloc] init];
     target.photos = _searchResults[_searches[0]];
-    target.layoutType = kFreeSized;
+    target.layoutType = kStretchSpaces;
     target.view.frame = self.containerView.bounds;
     
     [self addChildViewController:target];

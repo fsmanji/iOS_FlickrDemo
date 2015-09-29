@@ -19,7 +19,9 @@ typedef NS_ENUM(NSUInteger, JustifiedType) {
 @interface JustifiedViewController : UIViewController
 
 @property(nonatomic, strong) NSArray *photos;
-
 @property JustifiedType layoutType;
+
+
+-(void)updatePhotos:(NSArray *)newPhotos;
 
 @end

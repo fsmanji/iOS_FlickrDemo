@@ -24,9 +24,6 @@
                                     <constraint firstAttribute="height" constant="44" id="Usb-0r-Rlu"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem title="Search" id="zJK-jF-cLJ">
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    </barButtonItem>
                                     <barButtonItem title="Explore" id="OWV-Dv-QvV">
                                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </barButtonItem>
@@ -119,7 +116,7 @@
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T7S-3K-AM3">
                                 <rect key="frame" x="16" y="314" width="568" height="286"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -165,7 +162,6 @@
                         <outlet property="justifiedButton3" destination="8lO-k9-RLi" id="Tv2-JE-Muh"/>
                         <outlet property="rootView" destination="8bC-Xf-vdC" id="fuC-ag-zPV"/>
                         <outlet property="searchBar" destination="5gb-cp-xLL" id="Mw5-eV-EMT"/>
-                        <outlet property="searchButton" destination="zJK-jF-cLJ" id="ObS-rL-Q58"/>
                         <outlet property="toolBar" destination="yel-0j-CAq" id="7Um-eq-8nq"/>
                     </connections>
                 </viewController>

@@ -233,4 +233,15 @@
     return UIEdgeInsetsMake(0,0,0,0);  // top, left, bottom, right
 }
 
+#pragma MARK - public methods
+
+-(void)updatePhotos:(NSArray *)newPhotos {
+    _photos = newPhotos;
+    if (_layoutType == kStrictSpacing) {
+        [self startJustifying];
+    } else {
+        [_collectionView reloadData];
+    }
+}
+
 @end
