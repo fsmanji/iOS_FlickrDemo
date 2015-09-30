@@ -244,4 +244,16 @@
     }
 }
 
+-(void)updateJustifiedType:(JustifiedType)layoutType {
+    _layoutType = layoutType;
+    if (layoutType == kLeftAligned) {
+        _collectionView.collectionViewLayout =  [[JustifiedLayout alloc] init];
+    } else {
+        _collectionView.collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+    }
+    
+    [_collectionView.collectionViewLayout invalidateLayout];
+    [_collectionView reloadData];
+}
+
 @end

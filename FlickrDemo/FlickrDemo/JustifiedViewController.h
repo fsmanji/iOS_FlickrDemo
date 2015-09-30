@@ -23,5 +23,6 @@ typedef NS_ENUM(NSUInteger, JustifiedType) {
 
 
 -(void)updatePhotos:(NSArray *)newPhotos;
+-(void)updateJustifiedType:(JustifiedType)layoutType;
 
 @end

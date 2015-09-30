@@ -12,6 +12,7 @@
 #import "MBProgressHUD.h"
 #import "Flickr.h"
 
+#define kExploreTag @"explore"
 
 @interface HomeViewController () <UISearchBarDelegate>
 @property UISearchBar *searchBar;
@@ -52,10 +53,20 @@
     }
     
     
-    //3. add left button
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Search" style:UIBarButtonItemStylePlain target:self action:@selector(onLeftButtonTapped:)];
+    //3. add left buttons
     
-    self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
+    UIBarButtonItem* searchButton = [[UIBarButtonItem alloc] initWithTitle:@"Search" style:UIBarButtonItemStylePlain target:self action:@selector(onSearchClicked:)];
+    UIBarButtonItem* exploreButton = [[UIBarButtonItem alloc] initWithTitle:@"Explore" style:UIBarButtonItemStylePlain target:self action:@selector(onExploreClicked:)];
+    self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:searchButton, exploreButton, nil];
+    
+    //4. add right buttons;
+    UIBarButtonItem* justifiedLayout1 = [[UIBarButtonItem alloc] initWithTitle:@"JustifiedLayout" style:UIBarButtonItemStylePlain target:self action:@selector(onJustified1Clicked:)];
+    UIBarButtonItem* justifiedLayout2 = [[UIBarButtonItem alloc] initWithTitle:@"LeftAligned" style:UIBarButtonItemStylePlain target:self action:@selector(onJustified2Clicked:)];
+    UIBarButtonItem* justifiedLayout3 = [[UIBarButtonItem alloc] initWithTitle:@"StretchSpace" style:UIBarButtonItemStylePlain target:self action:@selector(onJustified3Clicked:)];
+    UIBarButtonItem* justifiedLayout4 = [[UIBarButtonItem alloc] initWithTitle:@"DefaultStyle" style:UIBarButtonItemStylePlain target:self action:@selector(onJustified4Clicked:)];
+    
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:justifiedLayout1, justifiedLayout2,justifiedLayout3, justifiedLayout4,nil];
+
 }
 
 -(void)addSearchBar{
@@ -73,6 +84,8 @@
         _searchBar.delegate = self;
         
         _searchBarContainer.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7f];
+        UITapGestureRecognizer *tapHandler = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapOutside:)];
+        [_searchBarContainer addGestureRecognizer:tapHandler];
         
         [_searchBarContainer addSubview:_searchBar];
         [self.view addSubview:_searchBarContainer];
@@ -84,15 +97,43 @@
     _searchBarContainer.hidden = YES;
 }
 
--(void)onLeftButtonTapped:(id)sender {
-    if (!_searchBarContainer || _searchBarContainer.hidden) {
-        [self addSearchBar];
-        self.navigationItem.leftBarButtonItem.title = @"Explore";
-    } else {
-        self.navigationItem.leftBarButtonItem.title = @"Search";
-        [self dismissSearchBar];
-    }
+-(void)onTapOutside:(id)sender {
+    [self dismissSearchBar];
 }
+
+#pragma MARK - Nav bar button outlets
+
+-(void)onSearchClicked:(id)sender {
+    [self addSearchBar];
+}
+
+-(void)onExploreClicked:(id)sender {
+    if (_searchBarContainer.hidden) {
+        return;
+    }
+    [self dismissSearchBar];
+    [self showExplorePhotos:sender];
+
+}
+
+-(void)onJustified1Clicked:(id)sender {
+    JustifiedViewController* child = self.childViewControllers[0];
+    [child updateJustifiedType:kStrictSpacing];
+}
+
+-(void)onJustified2Clicked:(id)sender {
+    JustifiedViewController* child = self.childViewControllers[0];
+    [child updateJustifiedType:kLeftAligned];
+}
+-(void)onJustified3Clicked:(id)sender {
+    JustifiedViewController* child = self.childViewControllers[0];
+    [child updateJustifiedType:kStretchSpaces];
+}
+-(void)onJustified4Clicked:(id)sender {
+    JustifiedViewController* child = self.childViewControllers[0];
+    [child updateJustifiedType:kFreeSized];
+}
+
 
 #pragma search delegate
 
@@ -148,7 +189,7 @@
 
 -(void)embedExploreInHomeView{
     JustifiedViewController* target = [[JustifiedViewController alloc] init];
-    target.photos = _searchResults[_searches[0]];
+    target.photos = _searchResults[kExploreTag];
     target.layoutType = kStrictSpacing;
     target.view.frame = self.view.bounds;
     
@@ -157,18 +198,23 @@
 }
 
 -(IBAction)showExplorePhotos:(id)sender {
+    if (_searchResults[kExploreTag]) {
+        [self embedExploreInHomeView];
+        return;
+    }
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     [_flickr exploreWithCompletionBlock:^(NSArray *results, NSError *error) {
         
         if(results && [results count] > 0) {
-            NSString * searchTerm = @"explore";
+            NSString * searchTerm = kExploreTag;
             if(![self.searches containsObject:searchTerm]) {
                 NSLog(@"Found %ld photos matching %@", [results count],searchTerm);
                 [self.searches insertObject:searchTerm atIndex:0];
-                self.searchResults[searchTerm] = results;
+                
             }
+            self.searchResults[searchTerm] = results;
             
             [MBProgressHUD hideHUDForView:self.view animated:YES];
             
@@ -179,7 +225,6 @@
             [UIAlertView showAlert:self with:@"Flickr APIKey Expired" withMessage:@"Please replace the 'kExploreUrl' with the latest url on flickr dev site."];
         }
     }];
-    
 }
 
 @end
