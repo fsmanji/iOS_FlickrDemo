@@ -7,7 +7,9 @@ http://www.raywenderlich.com/22324/beginning-uicollectionview-in-ios-6-part-12
 
 
 #### Features
-
+- [x] No log in required to use.
+- [x] Daily polular flickr photos in 'Explore'
+- [x] Free searching in flickr's huge photo gallery.
 - [x] Flickr official Justified Layout style (strict spacing, Flow Layout vertical)
 - [x] Stack layout (Three photos together, second and third are stacked up, Flow Layout Horizontal with fixed height 100pts)
 - [x] Other Justified Layout Variations.
@@ -15,7 +17,7 @@ http://www.raywenderlich.com/22324/beginning-uicollectionview-in-ios-6-part-12
   - [x] auto stretching space to fill contentView width (with same row height)
   - [x] free sized cells (default as in Ray's demo)
 
-The flickr photos are from these two APIs, you need to get your own api keys or just use daily updated guest keys:
+The flickr photos are from these two APIs:
 
 - [x] Search & Explore
    - [x] Show search result by taking the user input as keyword
@@ -27,5 +29,5 @@ The flickr photos are from these two APIs, you need to get your own api keys or 
 
 ### Walkthrough
 
-![Video Walkthrough](flickrdemo.gif)
+![Video Walkthrough](myflickr.gif)
 
