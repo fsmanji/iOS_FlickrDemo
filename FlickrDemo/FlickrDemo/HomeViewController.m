@@ -108,7 +108,9 @@
 }
 
 -(void)onExploreClicked:(id)sender {
-    if (_searchBarContainer.hidden) {
+    if (!_searchBarContainer || _searchBarContainer.hidden) {
+        JustifiedViewController* child = self.childViewControllers[0];
+        [child updatePhotos:_searchResults[kExploreTag]];
         return;
     }
     [self dismissSearchBar];
@@ -188,6 +190,11 @@
 
 
 -(void)embedExploreInHomeView{
+    //already added
+    if (self.childViewControllers.count > 0) {
+        NSLog(@"Error: Justified child view controller already added");
+        return;
+    }
     JustifiedViewController* target = [[JustifiedViewController alloc] init];
     target.photos = _searchResults[kExploreTag];
     target.layoutType = kStrictSpacing;

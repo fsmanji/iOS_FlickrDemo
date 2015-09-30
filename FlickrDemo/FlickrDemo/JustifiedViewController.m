@@ -31,6 +31,9 @@
 
 @property BOOL justifyInProgress;
 
+@property UICollectionViewFlowLayout *flowLayout;
+@property JustifiedLayout *leftAlignedLayout;
+
 @end
 
 @implementation JustifiedViewController
@@ -41,7 +44,9 @@
     
     _rows = [NSMutableArray array];
     _items = [NSMutableArray array];
-
+    _leftAlignedLayout = [[JustifiedLayout alloc] init];
+    _flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    
     [self startJustifying];
     
     [self configureCollectionView];
@@ -137,7 +142,7 @@
 
 - (void)deviceOrientationDidChange:(NSNotification*)note
 {
-
+    
     if (_layoutType == kStrictSpacing) {
         [self startJustifying];
     }
@@ -193,11 +198,14 @@
 
 #pragma mark – UICollectionViewDelegateFlowLayout
 
-// 1
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (_layoutType == kStrictSpacing) {
         if (_justifyInProgress) {
             return CGSizeMake(0, 0);
+        }
+        //TODO: need find root cause of below bug.
+        if (indexPath.row >= _items.count) {
+            return CGSizeMake(100, 100);
         }
         JustifiedItem *item = _items[indexPath.row];
         return item.size;
@@ -236,24 +244,33 @@
 #pragma MARK - public methods
 
 -(void)updatePhotos:(NSArray *)newPhotos {
+    _photos = nil;
     _photos = newPhotos;
     if (_layoutType == kStrictSpacing) {
         [self startJustifying];
     } else {
+        [_collectionView.collectionViewLayout invalidateLayout];
         [_collectionView reloadData];
     }
 }
 
 -(void)updateJustifiedType:(JustifiedType)layoutType {
-    _layoutType = layoutType;
-    if (layoutType == kLeftAligned) {
-        _collectionView.collectionViewLayout =  [[JustifiedLayout alloc] init];
-    } else {
-        _collectionView.collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+    if (_layoutType != layoutType) {
+        NSLog(@"Applying Layout: %lu", (unsigned long)layoutType);
+        _layoutType = layoutType;
+        if (layoutType == kLeftAligned) {
+            _collectionView.collectionViewLayout =  _leftAlignedLayout;
+        } else {
+            _collectionView.collectionViewLayout = _flowLayout;
+        }
+        
+        if (_layoutType == kStrictSpacing) {
+            [self startJustifying];
+        } else {
+            [_collectionView.collectionViewLayout invalidateLayout];
+            [_collectionView reloadData];
+        }
     }
-    
-    [_collectionView.collectionViewLayout invalidateLayout];
-    [_collectionView reloadData];
 }
 
 @end
