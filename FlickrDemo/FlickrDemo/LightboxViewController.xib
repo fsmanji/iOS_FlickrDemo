@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LightboxViewController">
             <connections>
+                <outlet property="imageView" destination="Awo-fw-7ah" id="Fyg-n4-klt"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -13,7 +15,52 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView alpha="0.89999999999999991" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Awo-fw-7ah">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <gestureRecognizers/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="UuT-Pp-IkY" appends="YES" id="GEd-pb-cQg"/>
+                        <outletCollection property="gestureRecognizers" destination="SGz-36-Gys" appends="YES" id="A0t-4C-pQP"/>
+                        <outletCollection property="gestureRecognizers" destination="cEA-u0-dYP" appends="YES" id="lrd-9G-dcq"/>
+                        <outletCollection property="gestureRecognizers" destination="JFW-yD-Oce" appends="YES" id="H9Y-hn-VcK"/>
+                        <outletCollection property="gestureRecognizers" destination="8fK-cE-0uX" appends="YES" id="Q7n-9p-pxh"/>
+                    </connections>
+                </imageView>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Awo-fw-7ah" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="WmX-hl-QoS"/>
+                <constraint firstItem="Awo-fw-7ah" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="aiw-tW-XGK"/>
+                <constraint firstAttribute="trailing" secondItem="Awo-fw-7ah" secondAttribute="trailing" id="bQ6-T0-gWJ"/>
+                <constraint firstAttribute="bottom" secondItem="Awo-fw-7ah" secondAttribute="bottom" id="kXQ-qx-hcX"/>
+            </constraints>
         </view>
+        <tapGestureRecognizer id="SGz-36-Gys">
+            <connections>
+                <action selector="onTapGesture:" destination="-1" id="1KD-iT-4bh"/>
+            </connections>
+        </tapGestureRecognizer>
+        <swipeGestureRecognizer direction="right" id="cEA-u0-dYP">
+            <connections>
+                <action selector="onSwipeGesture:" destination="-1" id="ffV-V7-O9l"/>
+            </connections>
+        </swipeGestureRecognizer>
+        <panGestureRecognizer minimumNumberOfTouches="1" id="JFW-yD-Oce">
+            <connections>
+                <action selector="onPanGesture:" destination="-1" id="pTy-uQ-bya"/>
+            </connections>
+        </panGestureRecognizer>
+        <pinchGestureRecognizer id="UuT-Pp-IkY">
+            <connections>
+                <action selector="onPinchGesture:" destination="-1" id="Yz5-6y-jE1"/>
+            </connections>
+        </pinchGestureRecognizer>
+        <rotationGestureRecognizer id="8fK-cE-0uX">
+            <connections>
+                <action selector="onRotationGesture:" destination="-1" id="P0L-2g-gO1"/>
+            </connections>
+        </rotationGestureRecognizer>
     </objects>
 </document>

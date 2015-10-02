@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FlickrPhoto.h"
 
 @interface LightboxViewController : UIViewController
+
+@property FlickrPhoto *photo;
 
 @end

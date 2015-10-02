@@ -61,11 +61,18 @@
     
     //4. add right buttons;
     UIBarButtonItem* justifiedLayout1 = [[UIBarButtonItem alloc] initWithTitle:@"JustifiedLayout" style:UIBarButtonItemStylePlain target:self action:@selector(onJustified1Clicked:)];
+    
     UIBarButtonItem* justifiedLayout2 = [[UIBarButtonItem alloc] initWithTitle:@"LeftAligned" style:UIBarButtonItemStylePlain target:self action:@selector(onJustified2Clicked:)];
     UIBarButtonItem* justifiedLayout3 = [[UIBarButtonItem alloc] initWithTitle:@"StretchSpace" style:UIBarButtonItemStylePlain target:self action:@selector(onJustified3Clicked:)];
     UIBarButtonItem* justifiedLayout4 = [[UIBarButtonItem alloc] initWithTitle:@"DefaultStyle" style:UIBarButtonItemStylePlain target:self action:@selector(onJustified4Clicked:)];
     
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:justifiedLayout1, justifiedLayout2,justifiedLayout3, justifiedLayout4,nil];
+    
+    //5. font size
+    [[UINavigationBar appearance] setTitleTextAttributes:
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      [UIFont fontWithName:@"Helvetica-Bold" size:12.0],NSFontAttributeName,
+      nil]];
 
 }
 
@@ -90,6 +97,11 @@
         [_searchBarContainer addSubview:_searchBar];
         [self.view addSubview:_searchBarContainer];
     }
+    //bounce animatino to the search bar
+    _searchBar.frame = CGRectMake(20, 600, _searchBar.frame.size.width, _searchBar.frame.size.height);
+    [UIView animateWithDuration:0.8f delay:0 usingSpringWithDamping:0.5 initialSpringVelocity:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
+        _searchBar.frame = CGRectMake(20, 20, self.view.bounds.size.width - 40, 44);
+    } completion:nil];
 }
 
 -(void)dismissSearchBar{
@@ -232,6 +244,13 @@
             [UIAlertView showAlert:self with:@"Flickr APIKey Expired" withMessage:@"Please replace the 'kExploreUrl' with the latest url on flickr dev site."];
         }
     }];
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation) fromInterfaceOrientation
+{
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    self.searchBarContainer.frame = self.view.bounds;
+    _searchBar.frame = CGRectMake(20, 20, self.view.bounds.size.width - 40, 44);
 }
 
 @end

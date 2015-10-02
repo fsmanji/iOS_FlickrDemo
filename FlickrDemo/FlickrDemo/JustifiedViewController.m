@@ -16,6 +16,8 @@
 #import "JustifiedItem.h"
 #import "JustifiedRow.h"
 
+#import "LightboxViewController.h"
+
 #define MAX_HEIGHT 120
 #define kMaxSpacing 5
 #define kMaxItemsPerRow 5
@@ -190,7 +192,9 @@
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    LightboxViewController* lightbox = [[LightboxViewController alloc] init];
+    lightbox.photo = _photos[indexPath.row];
+    [self.navigationController pushViewController:lightbox animated:YES];
 }
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
     // TODO: Deselect item

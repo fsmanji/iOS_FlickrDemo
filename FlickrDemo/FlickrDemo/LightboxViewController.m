@@ -7,8 +7,12 @@
 //
 
 #import "LightboxViewController.h"
+#import <UIImageView+AFNetworking.h>
+#import "FlickrPhotoSize.h"
+#import "FlickrPhoto.h"
 
 @interface LightboxViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @end
 
@@ -16,22 +20,31 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+   NSURL * urlm = [NSURL URLWithString:self.photo.size.url_l];
+   // NSURL * urll = [NSURL URLWithString:self.photo.size.url_l];
+    [self.imageView setImageWithURL:urlm];
+    //[self.imageView setImageWithURL:urll];
+}
+- (IBAction)onTapGesture:(UITapGestureRecognizer *)sender {
+}
+- (IBAction)onSwipeGesture:(UISwipeGestureRecognizer *)sender {
+}
+- (IBAction)onPinchGesture:(UIPinchGestureRecognizer *)sender {
+}
+- (IBAction)onRotationGesture:(id)sender {
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)onPanGesture:(UIPanGestureRecognizer *)sender {
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)updatePhoto:(FlickrPhoto *)photo {
+    _photo = photo;
+    if ([self isViewLoaded]) {
+        NSURL * url = [NSURL URLWithString:self.photo.size.url_l];
+        [self.imageView setImageWithURL:url];
+    }
+    
 }
-*/
+
 
 @end
