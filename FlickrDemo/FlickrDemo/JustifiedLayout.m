@@ -24,9 +24,13 @@
         UICollectionViewLayoutAttributes *prevLayoutAttributes = answer[i - 1];
 
         NSInteger origin = CGRectGetMaxX(prevLayoutAttributes.frame);
-        if(origin + kMaxSpacing + currentLayoutAttributes.frame.size.width < self.collectionViewContentSize.width) {
+        if(origin + kMaxSpacing + currentLayoutAttributes.frame.size.width < self.collectionViewContentSize.width
+           && currentLayoutAttributes.frame.origin.x > 0) {
+            
             CGRect frame = currentLayoutAttributes.frame;
             frame.origin.x = origin + kMaxSpacing;
+
+            frame.origin.y = prevLayoutAttributes.frame.origin.y;
             currentLayoutAttributes.frame = frame;
         }
     }

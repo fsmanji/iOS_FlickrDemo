@@ -17,6 +17,7 @@
 #import "JustifiedRow.h"
 
 #import "LightboxViewController.h"
+#import <SVPullToRefresh.h>
 
 #define MAX_HEIGHT 120
 #define kMaxSpacing 5
@@ -82,6 +83,14 @@
     [_collectionView registerNib:nib forCellWithReuseIdentifier:@"FlickrCollectionViewCell"];
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
+    
+    //[_collectionView setAlwaysBounceVertical:YES];
+    [_collectionView addInfiniteScrollingWithActionHandler:^{
+        //TODO: load next page of photos from server
+        [_collectionView.pullToRefreshView stopAnimating];
+    }];
+    //use white indicator as we're on black background.
+    [_collectionView.infiniteScrollingView setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhite];
     
     if (_layoutType == kLeftAligned) {
         _collectionView.collectionViewLayout = [[JustifiedLayout alloc] init];
@@ -223,7 +232,7 @@
         CGSize size_m = photo.size.size_m;
         
         if (_layoutType == kFreeSized) {
-            return size_m;
+            return [JustifiedItem resizePhoto:size_m withMaxHeight:MAX_HEIGHT * 2];
         }
         
         return [JustifiedItem resizePhoto:size_m withMaxHeight:MAX_HEIGHT];

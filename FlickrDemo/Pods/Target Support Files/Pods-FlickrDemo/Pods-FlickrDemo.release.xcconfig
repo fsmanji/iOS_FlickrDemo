@@ -1,5 +1,0 @@
-GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/AFNetworking" "${PODS_ROOT}/Headers/Public/FlickrKit" "${PODS_ROOT}/Headers/Public/MBProgressHUD"
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/AFNetworking" -isystem "${PODS_ROOT}/Headers/Public/FlickrKit" -isystem "${PODS_ROOT}/Headers/Public/MBProgressHUD"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"AFNetworking" -l"FlickrKit" -l"MBProgressHUD" -framework "CoreGraphics" -framework "MobileCoreServices" -framework "Security" -framework "SystemConfiguration" -weak_framework "AssetsLibrary"
-PODS_ROOT = ${SRCROOT}/Pods

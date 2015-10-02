@@ -8,49 +8,51 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>1</integer>
 		</dict>
 		<key>FlickrKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
 		</dict>
 		<key>MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
 		</dict>
-		<key>Pods-FlickrDemo.xcscheme</key>
+		<key>Pods-FlickrExplorer.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>4</integer>
+		</dict>
+		<key>SVPullToRefresh.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1A6D7F87AB7C53D298F61F726C61945D</key>
+		<key>4CB408AC9F713267ECB562210F2D34DF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4A2227C10DCBDFA714D0750BBA3A975F</key>
+		<key>95B96BF564D744C7CB98A22C4BF9C6A7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4EF0A071F01E208BE8B38291B29421B2</key>
+		<key>D10AFCBBC3949030D56276226438BB24</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>78E7CCC53D6A5825A0429C242F500C5B</key>
+		<key>D28F1896BFB6C0B4D77A2F978B0B672A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E8C6A17DB3C6D47D2263E6C894787A28</key>
 		<dict>
 			<key>primary</key>
 			<true/>

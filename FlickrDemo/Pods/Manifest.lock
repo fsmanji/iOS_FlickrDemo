@@ -20,15 +20,18 @@ PODS:
     - AFNetworking/NSURLSession
   - FlickrKit (1.0.5)
   - MBProgressHUD (0.9.1)
+  - SVPullToRefresh (0.4.1)
 
 DEPENDENCIES:
   - AFNetworking (= 2.2.1)
   - FlickrKit
   - MBProgressHUD (~> 0.9.1)
+  - SVPullToRefresh
 
 SPEC CHECKSUMS:
   AFNetworking: 59a0b8e9ecd4e194d64b4967232cd2cc83490113
   FlickrKit: fc0ed009c5cb69db4d82e68f7acb02002ebe1a42
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
+  SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
 
 COCOAPODS: 0.38.2
