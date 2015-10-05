@@ -202,8 +202,9 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     LightboxViewController* lightbox = [[LightboxViewController alloc] init];
-    lightbox.photo = _photos[indexPath.row];
-    [self.navigationController pushViewController:lightbox animated:YES];
+
+    [lightbox showPhotos:_photos fromPosition:indexPath.row];
+    [self.navigationController pushViewController:lightbox animated:NO];
 }
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
     // TODO: Deselect item

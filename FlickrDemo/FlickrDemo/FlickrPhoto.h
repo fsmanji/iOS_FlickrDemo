@@ -12,8 +12,6 @@
 @class FlickrPhotoSize;
 
 @interface FlickrPhoto : NSObject
-@property(nonatomic,strong) UIImage *thumbnail;
-@property(nonatomic,strong) UIImage *largeImage;
 
 // Lookup info
 @property NSString* title;

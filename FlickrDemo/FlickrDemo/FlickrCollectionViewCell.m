@@ -28,29 +28,7 @@
     //NSString * url = [photo flickrPhotoURLForSize:@"m"];
     [_imageView setImageWithURL:[NSURL URLWithString:photo.size.url_m] placeholderImage:[UIImage imageNamed:@"bg_cork"]];
 
-    //_imageView.image = photo.thumbnail;
 }
 
-- (id)initWithFrame:(CGRect)aRect
-{
-    if ((self = [super initWithFrame:aRect])) {
-        [self commonInit];
-    }
-    return self;
-}
-
-- (id)initWithCoder:(NSCoder*)coder
-{
-    if ((self = [super initWithCoder:coder])) {
-        [self commonInit];
-    }
-    return self;
-}
-
--(void)commonInit {
-    NSString * url = [_photo flickrPhotoURLForSize:@"m"];
-    //[_imageView setImageWithURL:[NSURL URLWithString:url]];
-    _imageView.image = _photo.thumbnail;
-}
 
 @end

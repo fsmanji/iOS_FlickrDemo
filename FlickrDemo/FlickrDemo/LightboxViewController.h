@@ -11,6 +11,6 @@
 
 @interface LightboxViewController : UIViewController
 
-@property FlickrPhoto *photo;
+-(void)showPhotos:(NSArray *)photos fromPosition:(NSUInteger)index;
 
 @end
