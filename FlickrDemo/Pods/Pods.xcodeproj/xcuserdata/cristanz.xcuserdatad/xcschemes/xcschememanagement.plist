@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>DACircularProgress.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>FlickrKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -19,7 +24,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MWPhotoBrowser-MWPhotoBrowser.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>MWPhotoBrowser.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-FlickrExplorer.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SDWebImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -32,12 +52,32 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>4CB408AC9F713267ECB562210F2D34DF</key>
+		<key>2E39E833D2A6153CE1A8E2E7F19BDC8E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>95B96BF564D744C7CB98A22C4BF9C6A7</key>
+		<key>3E92499EAA56AD71BC6148A2F6106878</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>41DB09415FAFFCA592342BFACBA13145</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5352D432641F0656C90741034E32F31E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6A46B833EE396491B0627446BBFC3A67</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>772BF7184408A5EE9FF355AE30C93166</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -47,12 +87,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D28F1896BFB6C0B4D77A2F978B0B672A</key>
+		<key>D15A77216A1B77B50676450D4E98BC3F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E8C6A17DB3C6D47D2263E6C894787A28</key>
+		<key>E0CD3C33D28EAE1E65709BBABE88A9DA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

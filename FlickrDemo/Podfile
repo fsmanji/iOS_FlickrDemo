@@ -7,6 +7,7 @@ pod 'MBProgressHUD', '~> 0.9.1'
 pod 'SVPullToRefresh'
 #pod 'SVProgressHD'
 pod 'FlickrKit'
+pod 'MWPhotoBrowser', '2.1.1'
 end
 
 target 'FlickrExplorerTests' do
