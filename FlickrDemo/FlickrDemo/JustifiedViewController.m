@@ -84,11 +84,23 @@
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
     
-    //[_collectionView setAlwaysBounceVertical:YES];
+    [_collectionView setAlwaysBounceVertical:YES];
+    
+    
+    //add infinite loading more at bottom
     [_collectionView addInfiniteScrollingWithActionHandler:^{
         //TODO: load next page of photos from server
-        [_collectionView.pullToRefreshView stopAnimating];
+        [_delegate onLoadMore:_photoSource];
+        //[_collectionView.infiniteScrollingView stopAnimating];
     }];
+    
+    //add pull to refresh
+    [_collectionView addPullToRefreshWithActionHandler:^{
+        [_delegate onRefresh:_photoSource];
+        //[_collectionView.pullToRefreshView.stopAnimating];
+    }];
+    
+    
     //use white indicator as we're on black background.
     [_collectionView.infiniteScrollingView setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhite];
     
@@ -258,6 +270,9 @@
 #pragma MARK - public methods
 
 -(void)updatePhotos:(NSArray *)newPhotos {
+    [_collectionView.pullToRefreshView stopAnimating];
+    [_collectionView.infiniteScrollingView stopAnimating];
+    
     _photos = nil;
     _photos = newPhotos;
     if (_layoutType == kStrictSpacing) {

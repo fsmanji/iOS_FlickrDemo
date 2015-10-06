@@ -16,11 +16,25 @@ typedef NS_ENUM(NSUInteger, JustifiedType) {
     kFreeSized
 };
 
+typedef NS_ENUM(NSUInteger, PhotoSource) {
+    kExplore,
+    kSearch
+};
+
+
+@protocol JustifiedViewLoadMoreDelegate <NSObject>
+
+-(void)onLoadMore:(PhotoSource)source;
+-(void)onRefresh:(PhotoSource)source;
+
+@end
+
 @interface JustifiedViewController : UIViewController
 
 @property(nonatomic, strong) NSArray *photos;
 @property JustifiedType layoutType;
-
+@property PhotoSource photoSource;
+@property id<JustifiedViewLoadMoreDelegate> delegate;
 
 -(void)updatePhotos:(NSArray *)newPhotos;
 -(void)updateJustifiedType:(JustifiedType)layoutType;

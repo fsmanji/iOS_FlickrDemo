@@ -11,10 +11,11 @@
 #import "UIAlertView+FSMANJI.h"
 #import "MBProgressHUD.h"
 #import "Flickr.h"
+#import "FlickrInterestingness.h"
 
 #define kExploreTag @"explore"
 
-@interface HomeViewController () <UISearchBarDelegate>
+@interface HomeViewController () <UISearchBarDelegate, JustifiedViewLoadMoreDelegate>
 @property UISearchBar *searchBar;
 @property UIView* searchBarContainer;
 
@@ -73,7 +74,7 @@
      [NSDictionary dictionaryWithObjectsAndKeys:
       [UIFont fontWithName:@"Helvetica-Bold" size:12.0],NSFontAttributeName,
       nil]];
-
+    
 }
 
 -(void)addSearchBar{
@@ -81,7 +82,7 @@
         _searchBar.text = @"";
         _searchBarContainer.hidden = NO;
         [self.view addSubview:_searchBarContainer];
-
+        
     } else {
         _searchBarContainer = [[UIView alloc] initWithFrame:self.view.bounds];
         _searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(20, 20, self.view.bounds.size.width - 40, 44)];
@@ -122,12 +123,12 @@
 -(void)onExploreClicked:(id)sender {
     if (!_searchBarContainer || _searchBarContainer.hidden) {
         JustifiedViewController* child = self.childViewControllers[0];
-        [child updatePhotos:_searchResults[kExploreTag]];
+        [child updatePhotos:_flickr.interestingness.photos];
         return;
     }
     [self dismissSearchBar];
     [self showExplorePhotos:sender];
-
+    
 }
 
 -(void)onJustified1Clicked:(id)sender {
@@ -166,7 +167,7 @@
 - (void)doSearch:(NSString *)query{
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-
+    
     if (query && query.length > 0) {
         [_flickr searchFlickrForTerm:query completionBlock:^(NSString *searchTerm, NSArray *results, NSError *error) {
             
@@ -184,6 +185,8 @@
                     if (self.childViewControllers.count > 0) {
                         
                         JustifiedViewController* child = self.childViewControllers[0];
+                        child.photoSource = kSearch;
+                    
                         [child updatePhotos:results];
                         [self dismissSearchBar];
                         
@@ -208,10 +211,14 @@
         return;
     }
     JustifiedViewController* target = [[JustifiedViewController alloc] init];
-    target.photos = _searchResults[kExploreTag];
+    target.photos = _flickr.interestingness.photos;
+    target.photoSource = kExplore;
     target.layoutType = kStrictSpacing;
-    target.view.frame = self.view.bounds;
     
+    target.delegate = self;
+    
+    
+    target.view.frame = self.view.bounds;
     [self addChildViewController:target];
     [self.view addSubview:target.view];
 }
@@ -223,27 +230,35 @@
     }
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
-    [_flickr exploreWithCompletionBlock:^(NSArray *results, NSError *error) {
-        
+    [_flickr.interestingness refreshWithCompletionBlock:^(NSArray *results, NSError *error) {
         if(results && [results count] > 0) {
-            NSString * searchTerm = kExploreTag;
-            if(![self.searches containsObject:searchTerm]) {
-                NSLog(@"Found %ld photos matching %@", [results count],searchTerm);
-                [self.searches insertObject:searchTerm atIndex:0];
-                
-            }
-            self.searchResults[searchTerm] = results;
-            
             [MBProgressHUD hideHUDForView:self.view animated:YES];
             
             [self embedExploreInHomeView];
-            
         } else {
             NSLog(@"Error searching Flickr: %@", error.localizedDescription);
             [UIAlertView showAlert:self with:@"Flickr APIKey Expired" withMessage:@"Please replace the 'kExploreUrl' with the latest url on flickr dev site."];
         }
+        
     }];
+    
+    /*[_flickr exploreWithCompletionBlock:^(NSArray *results, NSError *error) {
+     
+     if(results && [results count] > 0) {
+     NSString * searchTerm = kExploreTag;
+     if(![self.searches containsObject:searchTerm]) {
+     NSLog(@"Found %ld photos matching %@", [results count],searchTerm);
+     [self.searches insertObject:searchTerm atIndex:0];
+     
+     }
+     self.searchResults[searchTerm] = results;
+     
+     
+     } else {
+     NSLog(@"Error searching Flickr: %@", error.localizedDescription);
+     [UIAlertView showAlert:self with:@"Flickr APIKey Expired" withMessage:@"Please replace the 'kExploreUrl' with the latest url on flickr dev site."];
+     }
+     }];*/
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation) fromInterfaceOrientation
@@ -252,5 +267,22 @@
     self.searchBarContainer.frame = self.view.bounds;
     _searchBar.frame = CGRectMake(20, 20, self.view.bounds.size.width - 40, 44);
 }
+
+-(void)onLoadMore:(PhotoSource)source {
+    if (source == kExplore) {
+        [_flickr.interestingness loadMoreWithCompletionBlock:^(NSArray *results, NSError *error) {
+            [self onExploreClicked:nil];
+        }];
+    }
+}
+
+-(void)onRefresh:(PhotoSource)source {
+    if (source == kExplore) {
+        [_flickr.interestingness refreshWithCompletionBlock:^(NSArray *results, NSError *error) {
+            [self onExploreClicked:nil];
+        }];
+    }
+}
+
 
 @end

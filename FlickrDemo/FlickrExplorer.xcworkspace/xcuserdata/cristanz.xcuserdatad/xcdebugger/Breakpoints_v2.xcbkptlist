@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlickrDemo/JustifiedViewController.m"
-            timestampString = "465508989.178172"
+            timestampString = "465857633.63433"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
             landmarkName = "-configureCollectionView"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlickrDemo/LightboxViewController.m"
-            timestampString = "465767355.977477"
+            timestampString = "465846642.501603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
             landmarkName = "-photoBrowser:photoAtIndex:"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlickrDemo/LightboxViewController.m"
-            timestampString = "465767355.977477"
+            timestampString = "465846642.501603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "-photoBrowser:photoAtIndex:"
             landmarkType = "5">
          </BreakpointContent>
@@ -138,13 +138,141 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FlickrDemo/LightboxViewController.m"
-            timestampString = "465767658.064332"
+            timestampString = "465846642.501603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
             landmarkName = "-photoBrowser:photoAtIndex:"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FlickrDemo/DataModel/FlickrInterestingness.m"
+            timestampString = "465856611.12598"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "-getPage:WithCompletionBlock:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FlickrDemo/DataModel/FlickrInterestingness.m"
+            timestampString = "465856615.405855"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "-getPage:WithCompletionBlock:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[FlickrInterestingness getPage:WithCompletionBlock:]"
+                  moduleName = "FlickrExplorer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristanz/Development/iOS/Training/iOS_SimpleFlickrClient/FlickrDemo/FlickrDemo/DataModel/FlickrInterestingness.m"
+                  timestampString = "465857656.347696"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45"
+                  offsetFromSymbolStart = "362">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__53-[FlickrInterestingness getPage:WithCompletionBlock:]_block_invoke"
+                  moduleName = "FlickrExplorer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristanz/Development/iOS/Training/iOS_SimpleFlickrClient/FlickrDemo/FlickrDemo/DataModel/FlickrInterestingness.m"
+                  timestampString = "465857656.347835"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45"
+                  offsetFromSymbolStart = "108">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FlickrDemo/JustifiedViewController.m"
+            timestampString = "465857656.328957"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "274"
+            endingLineNumber = "274"
+            landmarkName = "-updatePhotos:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FlickrDemo/DataModel/FlickrInterestingness.m"
+            timestampString = "465857756.593879"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "-getPage:WithCompletionBlock:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__53-[FlickrInterestingness getPage:WithCompletionBlock:]_block_invoke"
+                  moduleName = "FlickrExplorer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristanz/Development/iOS/Training/iOS_SimpleFlickrClient/FlickrDemo/FlickrDemo/DataModel/FlickrInterestingness.m"
+                  timestampString = "465857756.596464"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "1946">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__53-[FlickrInterestingness getPage:WithCompletionBlock:]_block_invoke63"
+                  moduleName = "FlickrExplorer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristanz/Development/iOS/Training/iOS_SimpleFlickrClient/FlickrDemo/FlickrDemo/DataModel/FlickrInterestingness.m"
+                  timestampString = "465857756.5967"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
