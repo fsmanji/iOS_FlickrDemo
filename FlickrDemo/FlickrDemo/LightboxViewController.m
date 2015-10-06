@@ -38,8 +38,7 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor blackColor];
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
-    
+
     if (_waitToShow) {
         [self presentLightbox];
     }
@@ -117,12 +116,18 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     //remove myself as I'm just a helper view controller.
-
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    
     NSMutableArray *allVCs = [NSMutableArray arrayWithArray: self.navigationController.viewControllers];
     if (_didShow && [allVCs containsObject:self]) {
         [allVCs removeObject:self];
     }
     self.navigationController.viewControllers = allVCs;
+    
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
     
 }
 
