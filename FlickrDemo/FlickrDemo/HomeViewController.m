@@ -106,8 +106,26 @@
 }
 
 -(void)dismissSearchBar{
-    [_searchBarContainer removeFromSuperview];
-    _searchBarContainer.hidden = YES;
+    CGSize size = self.view.bounds.size;
+    CGRect center = CGRectMake(size.width/2, size.height/2, 0, 0);
+    CGRect oldFrame = _searchBar.frame;
+    
+    [UIView animateWithDuration:0.6f animations:^{
+        
+        //animate with fade out and zoom out.
+        _searchBarContainer.alpha = 0;
+        _searchBar.frame = center;
+        
+    }completion:^(BOOL finished){
+        [_searchBarContainer removeFromSuperview];
+        
+        //restore previous states
+        _searchBarContainer.hidden = YES;
+        _searchBarContainer.alpha = 1;
+        _searchBar.frame = oldFrame;
+    }];
+    
+    
 }
 
 -(void)onTapOutside:(id)sender {
