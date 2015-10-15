@@ -7,10 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Flickr.h"
 //
 //api link:  https://www.flickr.com/services/api/explore/flickr.interestingness.getList
 //
+
+typedef void (^FlickrExploreCompletionBlock)(NSArray *results, NSError *error);
+@class Flickr;
+
 @interface FlickrInterestingness : NSObject
 
 @property NSMutableArray* photos; //array of FlickrPhoto

@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 #import <FlickrKit.h>
+#import "FlickrSearch.h"
+#import "FlickrInterestingness.h"
 
 
 //default extras: url_[] will return the photo dimention together with url.
@@ -24,9 +26,8 @@
 @class FlickrInterestingness;
 @class FlickrSearch;
 
-typedef void (^FlickrSearchCompletionBlock)(NSString *searchTerm, NSArray *results, NSError *error);
 typedef void (^FlickrPhotoCompletionBlock)(UIImage *photoImage, NSError *error);
-typedef void (^FlickrExploreCompletionBlock)(NSArray *results, NSError *error);
+
 
 @interface Flickr : NSObject
 
@@ -34,8 +35,6 @@ typedef void (^FlickrExploreCompletionBlock)(NSArray *results, NSError *error);
 
 @property FlickrInterestingness* interestingness;
 @property FlickrSearch* search;
-
-- (void)searchFlickrForTerm:(NSString *) term completionBlock:(FlickrSearchCompletionBlock) completionBlock;
 
 + (Flickr *)api;
 

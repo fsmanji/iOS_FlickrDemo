@@ -32,41 +32,9 @@
     self = [super init];
     if (self) {
         self.interestingness = [[FlickrInterestingness alloc] initWithFlickr:self];
+        self.search = [[FlickrSearch alloc] initWithFlickr:self];
     }
     return self;
 }
-
-- (void)searchFlickrForTerm:(NSString *) term completionBlock:(FlickrSearchCompletionBlock) completionBlock
-{
-    FKFlickrPhotosSearch * search = [[FKFlickrPhotosSearch alloc] init];
-    search.text = term;
-    search.sort = kSortBy;
-    search.extras = kDefaultExtras;
-    
-    [_apiKit call:search completion:^(NSDictionary *response, NSError *error) {
-        
-        if(error){
-            dispatch_async(dispatch_get_main_queue(), ^{
-                completionBlock(term,nil,error);
-            });
-        } else {
-            NSArray *objPhotos = response[@"photos"][@"photo"];
-            NSMutableArray *flickrPhotos = [NSMutableArray array];
-            for(NSMutableDictionary *objPhoto in objPhotos)
-            {
-                FlickrPhoto *photo = [FlickrPhoto initWithJson:objPhoto];
-                
-                [flickrPhotos addObject:photo];
-            }
-            dispatch_async(dispatch_get_main_queue(), ^{
-                completionBlock(term,flickrPhotos,nil);
-            });
-            
-        }
-        
-    }];
-}
-
-
 
 @end

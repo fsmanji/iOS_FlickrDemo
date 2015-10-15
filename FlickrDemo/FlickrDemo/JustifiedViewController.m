@@ -269,12 +269,17 @@
 
 #pragma MARK - public methods
 
--(void)updatePhotos:(NSArray *)newPhotos {
+-(void)updatePhotos:(NSArray *)newPhotos resetState:(BOOL)reset {
     [_collectionView.pullToRefreshView stopAnimating];
     [_collectionView.infiniteScrollingView stopAnimating];
     
     _photos = nil;
     _photos = newPhotos;
+    
+    if (reset) {
+        [_collectionView setContentOffset:CGPointZero animated:NO];
+    }
+    
     if (_layoutType == kStrictSpacing) {
         [self startJustifying];
     } else {

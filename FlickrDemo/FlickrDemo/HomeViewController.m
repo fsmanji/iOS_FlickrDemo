@@ -19,8 +19,6 @@
 @property UISearchBar *searchBar;
 @property UIView* searchBarContainer;
 
-@property(nonatomic, strong) NSMutableDictionary *searchResults;
-@property(nonatomic, strong) NSMutableArray *searches;
 @property(nonatomic, strong) Flickr *flickr;
 
 @end
@@ -30,9 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self styleNavigationBar];
-    
-    _searchResults = [NSMutableDictionary dictionary];
-    _searches = [NSMutableArray array];
+
     _flickr = [Flickr api];
     
     [self showExplorePhotos:nil];
@@ -106,6 +102,9 @@
 }
 
 -(void)dismissSearchBar{
+    if (!_searchBarContainer || _searchBarContainer.hidden) {
+        return;
+    }
     CGSize size = self.view.bounds.size;
     CGRect center = CGRectMake(size.width/2, size.height/2, 0, 0);
     CGRect oldFrame = _searchBar.frame;
@@ -139,14 +138,15 @@
 }
 
 -(void)onExploreClicked:(id)sender {
-    if (!_searchBarContainer || _searchBarContainer.hidden) {
+    
+    [self dismissSearchBar];
+    if (self.childViewControllers.count > 0) {
         JustifiedViewController* child = self.childViewControllers[0];
-        [child updatePhotos:_flickr.interestingness.photos];
+        [child updatePhotos:_flickr.interestingness.photos  resetState:YES];
         return;
     }
-    [self dismissSearchBar];
+
     [self showExplorePhotos:sender];
-    
 }
 
 -(void)onJustified1Clicked:(id)sender {
@@ -183,40 +183,34 @@
 #pragma PRIVATE methods
 
 - (void)doSearch:(NSString *)query{
-    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     if (query && query.length > 0) {
-        [_flickr searchFlickrForTerm:query completionBlock:^(NSString *searchTerm, NSArray *results, NSError *error) {
+        [_flickr.search startSearch:query completionBlock:^(NSString *searchTerm, NSArray *results, NSError *error) {
             
-            if(results && [results count] > 0) {
-                
-                if(![self.searches containsObject:searchTerm]) {
-                    NSLog(@"Found %ld photos matching %@", [results count],searchTerm);
-                    [self.searches insertObject:searchTerm atIndex:0];
-                    self.searchResults[searchTerm] = results;
-                }
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [MBProgressHUD hideHUDForView:self.view animated:YES];
-                    
+            NSLog(@"Found %ld photos matching %@", [results count],searchTerm);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                if(results && [results count] > 0) {
                     if (self.childViewControllers.count > 0) {
                         
                         JustifiedViewController* child = self.childViewControllers[0];
                         child.photoSource = kSearch;
-                    
-                        [child updatePhotos:results];
+                        
+                        [child updatePhotos:_flickr.search.photos resetState:YES];
                         [self dismissSearchBar];
                         
                     } else {
-                        [self embedExploreInHomeView];
+                        //TODO:
+                        //[self embedExploreInHomeView];
                     }
-                    
-                });
-            } else {
-                NSLog(@"Error searching Flickr: %@", error.localizedDescription);
-                [UIAlertView showAlert:self with:@"Flickr APIKey Expired" withMessage:@"Please replace the 'kApiKey/kAuthToken/kApiSig' with the latest ones."];
-            }
+                } else {
+                    NSLog(@"Error searching Flickr: %@", error.localizedDescription);
+                    [UIAlertView showAlert:self with:@"Flickr APIKey Expired" withMessage:@"There is no photos found matching your query."];
+                    _searchBar.text = nil;
+                }
+            });
+            
         }];
     }
 }
@@ -242,16 +236,15 @@
 }
 
 -(IBAction)showExplorePhotos:(id)sender {
-    if (_searchResults[kExploreTag]) {
+    if (_flickr.interestingness.photos.count > 0) {
         [self embedExploreInHomeView];
         return;
     }
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [_flickr.interestingness refreshWithCompletionBlock:^(NSArray *results, NSError *error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         if(results && [results count] > 0) {
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-            
             [self embedExploreInHomeView];
         } else {
             NSLog(@"Error searching Flickr: %@", error.localizedDescription);
@@ -259,24 +252,7 @@
         }
         
     }];
-    
-    /*[_flickr exploreWithCompletionBlock:^(NSArray *results, NSError *error) {
-     
-     if(results && [results count] > 0) {
-     NSString * searchTerm = kExploreTag;
-     if(![self.searches containsObject:searchTerm]) {
-     NSLog(@"Found %ld photos matching %@", [results count],searchTerm);
-     [self.searches insertObject:searchTerm atIndex:0];
-     
-     }
-     self.searchResults[searchTerm] = results;
-     
-     
-     } else {
-     NSLog(@"Error searching Flickr: %@", error.localizedDescription);
-     [UIAlertView showAlert:self with:@"Flickr APIKey Expired" withMessage:@"Please replace the 'kExploreUrl' with the latest url on flickr dev site."];
-     }
-     }];*/
+
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation) fromInterfaceOrientation
@@ -287,17 +263,33 @@
 }
 
 -(void)onLoadMore:(PhotoSource)source {
-    if (source == kExplore) {
+    if (kExplore == source) {
         [_flickr.interestingness loadMoreWithCompletionBlock:^(NSArray *results, NSError *error) {
-            [self onExploreClicked:nil];
+            [_flickr.search loadMoreWithCompletionBlock:^(NSString* term, NSArray *results, NSError *error) {
+                JustifiedViewController* child = self.childViewControllers[0];
+                [child updatePhotos:_flickr.interestingness.photos resetState:NO];
+            }];
+        }];
+    } else if (kSearch == source) {
+        [_flickr.search loadMoreWithCompletionBlock:^(NSString* term, NSArray *results, NSError *error) {
+            JustifiedViewController* child = self.childViewControllers[0];
+            [child updatePhotos:_flickr.search.photos  resetState:NO];
         }];
     }
 }
 
 -(void)onRefresh:(PhotoSource)source {
-    if (source == kExplore) {
+    if (kExplore == source) {
         [_flickr.interestingness refreshWithCompletionBlock:^(NSArray *results, NSError *error) {
-            [self onExploreClicked:nil];
+            [_flickr.search loadMoreWithCompletionBlock:^(NSString* term, NSArray *results, NSError *error) {
+                JustifiedViewController* child = self.childViewControllers[0];
+                [child updatePhotos:_flickr.interestingness.photos  resetState:NO];
+            }];
+        }];
+    } else if (kSearch == source) {
+        [_flickr.search refreshWithCompletionBlock:^(NSString* term, NSArray *results, NSError *error) {
+            JustifiedViewController* child = self.childViewControllers[0];
+            [child updatePhotos:_flickr.search.photos  resetState:NO];
         }];
     }
 }

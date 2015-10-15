@@ -223,7 +223,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "274"
             endingLineNumber = "274"
-            landmarkName = "-updatePhotos:"
+            landmarkName = "-updatePhotos:resetState:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -250,7 +250,7 @@
                   moduleName = "FlickrExplorer"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/cristanz/Development/iOS/Training/iOS_SimpleFlickrClient/FlickrDemo/FlickrDemo/DataModel/FlickrInterestingness.m"
-                  timestampString = "465857756.596464"
+                  timestampString = "466626388.612623"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "72"
@@ -265,7 +265,7 @@
                   moduleName = "FlickrExplorer"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/cristanz/Development/iOS/Training/iOS_SimpleFlickrClient/FlickrDemo/FlickrDemo/DataModel/FlickrInterestingness.m"
-                  timestampString = "465857756.5967"
+                  timestampString = "466626388.612753"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "72"
@@ -273,6 +273,38 @@
                   offsetFromSymbolStart = "16">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FlickrDemo/HomeViewController.m"
+            timestampString = "466627632.240812"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "244"
+            endingLineNumber = "244"
+            landmarkName = "-showExplorePhotos:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FlickrDemo/HomeViewController.m"
+            timestampString = "466627632.240812"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "239"
+            endingLineNumber = "239"
+            landmarkName = "-showExplorePhotos:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

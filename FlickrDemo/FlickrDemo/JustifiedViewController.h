@@ -36,7 +36,7 @@ typedef NS_ENUM(NSUInteger, PhotoSource) {
 @property PhotoSource photoSource;
 @property id<JustifiedViewLoadMoreDelegate> delegate;
 
--(void)updatePhotos:(NSArray *)newPhotos;
+-(void)updatePhotos:(NSArray *)newPhotos resetState:(BOOL)reset;
 -(void)updateJustifiedType:(JustifiedType)layoutType;
 
 @end
