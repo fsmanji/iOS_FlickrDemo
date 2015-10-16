@@ -50,7 +50,7 @@
     _leftAlignedLayout = [[JustifiedLayout alloc] init];
     _flowLayout = [[UICollectionViewFlowLayout alloc] init];
     
-    [self startJustifying];
+    [self startJustifying:YES];
     
     [self configureCollectionView];
     
@@ -59,7 +59,7 @@
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(deviceOrientationDidChange:) name: UIDeviceOrientationDidChangeNotification object: nil];
 }
 
--(void) startJustifying {
+-(void) startJustifying:(BOOL)scrollToTop {
     if (_justifyInProgress) {
         return;
     }
@@ -72,6 +72,9 @@
             if (_layoutType == kStrictSpacing) {
                 [_collectionView.collectionViewLayout invalidateLayout];
                 [_collectionView reloadData];
+                if (scrollToTop) {
+                    [_collectionView setContentOffset:CGPointZero animated:NO];
+                }
             }
         });
     });
@@ -167,7 +170,7 @@
 {
     
     if (_layoutType == kStrictSpacing) {
-        [self startJustifying];
+        [self startJustifying:NO];
     }
 }
 
@@ -276,15 +279,14 @@
     _photos = nil;
     _photos = newPhotos;
     
-    if (reset) {
-        [_collectionView setContentOffset:CGPointZero animated:NO];
-    }
-    
     if (_layoutType == kStrictSpacing) {
-        [self startJustifying];
+        [self startJustifying:reset];
     } else {
         [_collectionView.collectionViewLayout invalidateLayout];
         [_collectionView reloadData];
+        if (reset) {
+            [_collectionView setContentOffset:CGPointZero animated:NO];
+        }
     }
 }
 
@@ -299,7 +301,7 @@
         }
         
         if (_layoutType == kStrictSpacing) {
-            [self startJustifying];
+            [self startJustifying:NO];
         } else {
             [_collectionView.collectionViewLayout invalidateLayout];
             [_collectionView reloadData];

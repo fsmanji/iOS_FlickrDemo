@@ -142,6 +142,7 @@
     [self dismissSearchBar];
     if (self.childViewControllers.count > 0) {
         JustifiedViewController* child = self.childViewControllers[0];
+        child.photoSource = kExplore;
         [child updatePhotos:_flickr.interestingness.photos  resetState:YES];
         return;
     }
