@@ -52,7 +52,8 @@
     _waitToShow = NO;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [_flickrPhotos enumerateObjectsUsingBlock:^(FlickrPhoto* obj, NSUInteger idx, BOOL *stop) {
-            MWPhoto *photo = [MWPhoto photoWithURL:[NSURL URLWithString:obj.size.url_l]];
+            NSString* url = obj.size.url_l != nil? obj.size.url_l : obj.size.url_m;
+            MWPhoto *photo = [MWPhoto photoWithURL:[NSURL URLWithString:url]];
             photo.caption = obj.title;
             [_mwPhotos addObject:photo];
         }];
