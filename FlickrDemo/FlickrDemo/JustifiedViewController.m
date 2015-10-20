@@ -19,7 +19,8 @@
 #import "LightboxViewController.h"
 #import <SVPullToRefresh.h>
 
-#define MAX_HEIGHT 120
+#define MAX_HEIGHT 200
+#define TARGET_HEIGHT 120
 #define kMaxSpacing 5
 #define kMaxItemsPerRow 5
 
@@ -127,7 +128,7 @@
         
         CGSize size = photo.size.size_m;
         
-        JustifiedItem* item = [JustifiedItem initWithData:photo originalSize:size maxHeight:MAX_HEIGHT];
+        JustifiedItem* item = [JustifiedItem initWithData:photo originalSize:size maxHeight:TARGET_HEIGHT];
         
         NSLog(@"processing item: %lu", (unsigned long)idx);
         CGFloat currentSize = item.size.width + kMaxSpacing;
@@ -157,7 +158,7 @@
     //justify the rows
     
     [_rows enumerateObjectsUsingBlock:^(JustifiedRow* rowObject, NSUInteger idx, BOOL *stop) {
-        [rowObject justifyItemSizes:maxWidth maxHeight:MAX_HEIGHT minSpace:kMaxSpacing];
+        [rowObject justifyItemSizes:maxWidth targetHeight:TARGET_HEIGHT maxHeight:MAX_HEIGHT minSpace:kMaxSpacing];
         [rowObject.items enumerateObjectsUsingBlock:^(JustifiedItem *item, NSUInteger idx, BOOL *stop) {
             [self.items addObject:item];
         }];

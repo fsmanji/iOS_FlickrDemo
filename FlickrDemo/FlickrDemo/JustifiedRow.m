@@ -26,7 +26,7 @@
     return nil;
 }
 
--(void) justifyItemSizes:(CGFloat)maxWidth  maxHeight:(CGFloat)maxHeight minSpace:(CGFloat)minSpace{
+-(void) justifyItemSizes:(CGFloat)maxWidth targetHeight:(CGFloat)targetHeight maxHeight:(CGFloat)maxHeight minSpace:(CGFloat)minSpace{
     if ([self.items count] > 0) {
         
         __block CGFloat currentWidth = 0;
@@ -34,7 +34,7 @@
         //calculate the current item width;
         [self.items enumerateObjectsUsingBlock:^(JustifiedItem* item, NSUInteger idx, BOOL *stop) {
             //resize to same height;
-            [item resizeToHeight:maxHeight];
+            [item resizeToHeight:targetHeight];
             
             //advance the total width
             currentWidth += item.size.width;
@@ -44,10 +44,11 @@
         
         //get the ratio. If finalWidth is far from filling width, don't stretch them, that
         //usually is the last row.
-        if (finalWidth < maxWidth && finalWidth > maxWidth*0.7f) {
+        if (finalWidth < maxWidth) {
             ratio = maxWidth / finalWidth;
-        } else {
-            ratio = 1.0f;
+        }
+        if (ratio * targetHeight >= maxHeight) {
+            ratio = MIN(1.0f, maxHeight / targetHeight);
         }
         
         //multiply each item's width and height with the same ratio
