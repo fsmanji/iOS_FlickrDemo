@@ -41,6 +41,13 @@
     
     size.size_l = CGSizeMake([objPhoto[@"width_l"] integerValue], [objPhoto[@"height_l"] integerValue]);
     size.size_m = CGSizeMake([objPhoto[@"width_m"] integerValue], [objPhoto[@"height_m"] integerValue]);
+    if (size.size_l.height <= 0 || size.size_l.width <= 0) {
+        NSLog(@"Error: photo L size is 0");
+    }
+    if (size.size_m.height <= 0 || size.size_m.width <= 0) {
+        NSLog(@"Error: photo M size is 0");
+        return nil;
+    }
     
     photo.size = size;
     

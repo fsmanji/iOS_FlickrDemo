@@ -46,6 +46,7 @@
     FKFlickrPhotosSearch * search = [[FKFlickrPhotosSearch alloc] init];
     search.text = _term;
     search.sort = kSortBy;
+    search.safe_search=@"3";
     search.extras = kDefaultExtras;
     
     search.per_page =  [NSString stringWithFormat:@"%ld",self.perpage];
@@ -72,8 +73,10 @@
             for(NSMutableDictionary *objPhoto in objPhotos)
             {
                 FlickrPhoto *photo = [FlickrPhoto initWithJson:objPhoto];
-                
-                [flickrPhotos addObject:photo];
+                //if photo is nil, means it doesn't contain valid size info.
+                if (photo) {
+                    [flickrPhotos addObject:photo];
+                }
             }
             
             [self.photos addObjectsFromArray:flickrPhotos];
