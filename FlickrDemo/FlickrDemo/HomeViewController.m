@@ -248,8 +248,8 @@
         if(results && [results count] > 0) {
             [self embedExploreInHomeView];
         } else {
-            NSLog(@"Error searching Flickr: %@", error.localizedDescription);
-            [UIAlertView showAlert:self with:@"Flickr APIKey Expired" withMessage:@"Please replace the 'kExploreUrl' with the latest url on flickr dev site."];
+            DLog(@"Error searching Flickr: %@", error.localizedDescription);
+            ULog(@"Please replace the 'kExploreUrl' with the latest url on flickr dev site.");
         }
         
     }];

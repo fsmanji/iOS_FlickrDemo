@@ -74,6 +74,8 @@
 		B310F3D31BC442D900F167EE /* FlickrInterestingness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrInterestingness.m; sourceTree = "<group>"; };
 		B310F3D51BC442E900F167EE /* FlickrSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrSearch.h; sourceTree = "<group>"; };
 		B310F3D61BC442E900F167EE /* FlickrSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrSearch.m; sourceTree = "<group>"; };
+		B310F3D91BD6F77200F167EE /* FMJLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMJLogger.h; sourceTree = "<group>"; };
+		B310F3DA1BD6F79E00F167EE /* FlickrExplorer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FlickrExplorer-Prefix.pch"; sourceTree = "<group>"; };
 		B35EA5C41BB9F37F00371F62 /* FlickrPhotoSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlickrPhotoSize.h; path = ../FlickrPhotoSize.h; sourceTree = "<group>"; };
 		B35EA5C51BB9F37F00371F62 /* FlickrPhotoSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FlickrPhotoSize.m; path = ../FlickrPhotoSize.m; sourceTree = "<group>"; };
 		B35EA5C71BBA0C6500371F62 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 				B3A2DE431BB0BF7A006BE0DB /* Images.xcassets */,
 				B3A2DE451BB0BF7A006BE0DB /* LaunchScreen.xib */,
 				B3A2DE361BB0BF7A006BE0DB /* Supporting Files */,
+				B310F3D91BD6F77200F167EE /* FMJLogger.h */,
 			);
 			path = FlickrDemo;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 			children = (
 				B3A2DE371BB0BF7A006BE0DB /* Info.plist */,
 				B3A2DE381BB0BF7A006BE0DB /* main.m */,
+				B310F3DA1BD6F79E00F167EE /* FlickrExplorer-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -646,6 +650,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREFIX_HEADER = "FlickrDemo/FlickrExplorer-Prefix.pch";
 				INFOPLIST_FILE = FlickrDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -662,6 +667,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREFIX_HEADER = "FlickrDemo/FlickrExplorer-Prefix.pch";
 				INFOPLIST_FILE = FlickrDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -293,7 +293,7 @@
 
 -(void)updateJustifiedType:(JustifiedType)layoutType {
     if (_layoutType != layoutType) {
-        NSLog(@"Applying Layout: %lu", (unsigned long)layoutType);
+        ALog(@"Applying Layout: %lu", (unsigned long)layoutType);
         _layoutType = layoutType;
         if (layoutType == kLeftAligned) {
             _collectionView.collectionViewLayout =  _leftAlignedLayout;
