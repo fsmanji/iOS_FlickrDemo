@@ -42,10 +42,12 @@
         
         CGFloat finalWidth = minSpace * ([self.items count] -1) + currentWidth;
         
-        //get the ratio to increase
-        if (finalWidth < maxWidth ) {
-           
+        //get the ratio. If finalWidth is far from filling width, don't stretch them, that
+        //usually is the last row.
+        if (finalWidth < maxWidth && finalWidth > maxWidth*0.7f) {
             ratio = maxWidth / finalWidth;
+        } else {
+            ratio = 1.0f;
         }
         
         //multiply each item's width and height with the same ratio

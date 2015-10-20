@@ -24,7 +24,7 @@
 
 + (CGSize) resizePhoto:(CGSize)size withMaxHeight:(CGFloat)maxHeight{
     if (size.height == maxHeight || maxHeight <= 0) {
-        NSLog(@"Error: max height equals existing height or is 0");
+        //NSLog(@"Error: max height equals existing height or is 0");
         return size;
     }
     int width = size.width;
